@@ -1,0 +1,5 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/channo39mz/Desktop/Comgame/Content/bubble.png","C:/Users/channo39mz/Desktop/Comgame/Content/bin/DesktopGL/bubble.xnb","TextureProcessor","Texture2DContent",19302,3841685,1.3028781
+"C:/Users/channo39mz/Desktop/Comgame/Content/bubble2.png","C:/Users/channo39mz/Desktop/Comgame/Content/bin/DesktopGL/bubble2.xnb","TextureProcessor","Texture2DContent",1102,19685,0.0952215
+"C:/Users/channo39mz/Desktop/Comgame/Content/luncher.png","C:/Users/channo39mz/Desktop/Comgame/Content/bin/DesktopGL/luncher.xnb","TextureProcessor","Texture2DContent",800,14421,0.0804911
+"C:/Users/channo39mz/Desktop/Comgame/Content/luncher2.png","C:/Users/channo39mz/Desktop/Comgame/Content/bin/DesktopGL/luncher2.xnb","TextureProcessor","Texture2DContent",39551,921685,0.1469493

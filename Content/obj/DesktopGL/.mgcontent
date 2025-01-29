@@ -4,13 +4,11 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/channo39mz/Desktop/Comgame/Content/bubble.png</File>
-    <File>C:/Users/channo39mz/Desktop/Comgame/Content/bubble2.png</File>
-    <File>C:/Users/channo39mz/Desktop/Comgame/Content/luncher.png</File>
-    <File>C:/Users/channo39mz/Desktop/Comgame/Content/luncher2.png</File>
+    <File>c:/Users/modda/OneDrive/Documents/KMITL/ปี 3/Computer Game Programming/MidtermProject/Content/bubble.png</File>
+    <File>c:/Users/modda/OneDrive/Documents/KMITL/ปี 3/Computer Game Programming/MidtermProject/Content/GameFont.spritefont</File>
+    <File>c:/Users/modda/OneDrive/Documents/KMITL/ปี 3/Computer Game Programming/MidtermProject/Content/launcher.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

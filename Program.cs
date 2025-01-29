@@ -1,2 +1,2 @@
-﻿using var game = new Comgame.Game1();
+﻿using var game = new Comgame.MainScene();
 game.Run();

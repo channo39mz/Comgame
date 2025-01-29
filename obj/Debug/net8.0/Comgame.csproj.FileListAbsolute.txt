@@ -27,3 +27,32 @@ C:\Users\channo39mz\Desktop\Comgame\bin\Debug\net8.0\Content\bubble.xnb
 C:\Users\channo39mz\Desktop\Comgame\bin\Debug\net8.0\Content\luncher.xnb
 C:\Users\channo39mz\Desktop\Comgame\bin\Debug\net8.0\Content\luncher2.xnb
 C:\Users\channo39mz\Desktop\Comgame\bin\Debug\net8.0\Content\bubble2.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bubble.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Comgame.exe
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Comgame.deps.json
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Comgame.runtimeconfig.json
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Comgame.dll
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Comgame.pdb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\MonoGame.Framework.dll
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\NVorbis.dll
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\runtimes\linux-x64\native\libopenal.so.1
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\runtimes\osx\native\libopenal.1.dylib
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\runtimes\win-x64\native\soft_oal.dll
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\runtimes\win-x86\native\soft_oal.dll
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\runtimes\linux-x64\native\libSDL2-2.0.so.0
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\runtimes\osx\native\libSDL2.dylib
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\runtimes\win-x64\native\SDL2.dll
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\obj\Debug\net8.0\Comgame.csproj.AssemblyReference.cache
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\obj\Debug\net8.0\Comgame.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\obj\Debug\net8.0\Comgame.AssemblyInfoInputs.cache
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\obj\Debug\net8.0\Comgame.AssemblyInfo.cs
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\obj\Debug\net8.0\Comgame.csproj.CoreCompileInputs.cache
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\obj\Debug\net8.0\Comgame.sourcelink.json
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\obj\Debug\net8.0\Comgame.csproj.Up2Date
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\obj\Debug\net8.0\Comgame.dll
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\obj\Debug\net8.0\refint\Comgame.dll
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\obj\Debug\net8.0\Comgame.pdb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\obj\Debug\net8.0\Comgame.genruntimeconfig.cache
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\obj\Debug\net8.0\ref\Comgame.dll
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\launcher.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\GameFont.xnb

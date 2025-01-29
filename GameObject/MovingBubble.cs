@@ -1,5 +1,4 @@
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Comgame.GameObject;
 
@@ -7,7 +6,7 @@ class MovingBubble : Bubble
 {
     public Vector2 Velocity;
 
-    public MovingBubble(Texture2D texture, Vector2 position) : base(texture, position)
+    public MovingBubble(Vector2 position) : base(position)
     {
         Velocity = new Vector2(1.0f, 1.0f);
     }

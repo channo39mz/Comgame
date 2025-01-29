@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,20 +10,18 @@ class Launcher : GameObject
     private Vector2 _position;
 	private MovingBubble _loadedBubble;
 	private MovingBubble _nextBubble;
-	private Texture2D _bubbleTexture;
 
-    public Launcher(Texture2D texture, Vector2 position, Texture2D bubbleTexture) : base(texture)
+    public Launcher(Texture2D texture, Vector2 position) : base(texture)
     {
         _position = position;
         _rotation = 0f;
-		_bubbleTexture = bubbleTexture;
 		_loadedBubble = GenerateRandomBubble();
         _nextBubble = GenerateRandomBubble();
     }
 
 	private MovingBubble GenerateRandomBubble()
     {
-        return new MovingBubble(_bubbleTexture, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 2, Singleton.TILESIZE));
+        return new MovingBubble(new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 2, Singleton.TILESIZE));
     }
 
     public override void Update(GameTime gameTime)

@@ -56,3 +56,7 @@ c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\Midte
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\obj\Debug\net8.0\ref\Comgame.dll
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\launcher.xnb
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\GameFont.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bubble_blue.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bubble_green.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bubble_red.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bubble_yellow.xnb

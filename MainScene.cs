@@ -14,10 +14,9 @@ public class MainScene : Game
 
     private SpriteFont _font;
     private Texture2D _rectTexture;
-    private Texture2D _bubbleTexture;
     private Texture2D _launcherTexture;
     private Launcher _launcher;
-    private Random _random = new Random();
+    private Dictionary<Bubble.BubbleColor, Texture2D> _bubbleTextures;
 
     public MainScene()
     {
@@ -41,7 +40,15 @@ public class MainScene : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        _bubbleTexture = Content.Load<Texture2D>("bubble");
+        _bubbleTextures = new Dictionary<Bubble.BubbleColor, Texture2D>
+        {
+            { Bubble.BubbleColor.RED, Content.Load<Texture2D>("bubble_red") },
+            { Bubble.BubbleColor.BLUE, Content.Load<Texture2D>("bubble_blue") },
+            { Bubble.BubbleColor.GREEN, Content.Load<Texture2D>("bubble_green") },
+            { Bubble.BubbleColor.YELLOW, Content.Load<Texture2D>("bubble_yellow") }
+        };
+        Bubble.LoadTextures(_bubbleTextures);
+
         _launcherTexture = Content.Load<Texture2D>("launcher");
 
         _rectTexture = new Texture2D(_graphics.GraphicsDevice, 1, 1);
@@ -109,7 +116,7 @@ public class MainScene : Game
 
     protected void Reset()
     {
-        _launcher = new Launcher(_launcherTexture, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE / 2, (Singleton.GAMEHEIGHT + 1) * Singleton.TILESIZE), _bubbleTexture);
+        _launcher = new Launcher(_launcherTexture, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE / 2, (Singleton.GAMEHEIGHT + 1) * Singleton.TILESIZE));
         Singleton.Instance.GameBoard = new Bubble[Singleton.GAMEWIDTH, Singleton.GAMEHEIGHT];
 
         // Initialize bubbles in a zigzag pattern with decreasing count per row
@@ -120,7 +127,7 @@ public class MainScene : Game
             {
                 float offsetX = (y % 2 == 0) ? 0 : Singleton.TILESIZE / 2;
                 float offsetY = y * Singleton.TILESIZE * 0.866f; // Reduce vertical gap for hexagonal layout (0.866f = sqrt(3)/2)
-                var bubble = new Bubble(_bubbleTexture, new Vector2(x * Singleton.TILESIZE + offsetX, offsetY));
+                var bubble = new Bubble(new Vector2(x * Singleton.TILESIZE + offsetX, offsetY));
 
                 Singleton.Instance.GameBoard[x, y] = bubble;
             }

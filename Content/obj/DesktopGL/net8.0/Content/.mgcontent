@@ -4,13 +4,13 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/channo39mz/Desktop/Comgame3/Content/bubble.png</File>
-    <File>C:/Users/channo39mz/Desktop/Comgame3/Content/bubble_red.png</File>
-    <File>C:/Users/channo39mz/Desktop/Comgame3/Content/bubble_green.png</File>
-    <File>C:/Users/channo39mz/Desktop/Comgame3/Content/bubble_blue.png</File>
-    <File>C:/Users/channo39mz/Desktop/Comgame3/Content/bubble_yellow.png</File>
-    <File>C:/Users/channo39mz/Desktop/Comgame3/Content/GameFont.spritefont</File>
-    <File>C:/Users/channo39mz/Desktop/Comgame3/Content/launcher.png</File>
+    <File>c:/Users/ADMIN/Desktop/CS classes/ThirdYear/Term2/ComGame/Bubble Game (Alpha)/Comgame/Content/bubble.png</File>
+    <File>c:/Users/ADMIN/Desktop/CS classes/ThirdYear/Term2/ComGame/Bubble Game (Alpha)/Comgame/Content/bubble_red.png</File>
+    <File>c:/Users/ADMIN/Desktop/CS classes/ThirdYear/Term2/ComGame/Bubble Game (Alpha)/Comgame/Content/bubble_green.png</File>
+    <File>c:/Users/ADMIN/Desktop/CS classes/ThirdYear/Term2/ComGame/Bubble Game (Alpha)/Comgame/Content/bubble_blue.png</File>
+    <File>c:/Users/ADMIN/Desktop/CS classes/ThirdYear/Term2/ComGame/Bubble Game (Alpha)/Comgame/Content/bubble_yellow.png</File>
+    <File>c:/Users/ADMIN/Desktop/CS classes/ThirdYear/Term2/ComGame/Bubble Game (Alpha)/Comgame/Content/GameFont.spritefont</File>
+    <File>c:/Users/ADMIN/Desktop/CS classes/ThirdYear/Term2/ComGame/Bubble Game (Alpha)/Comgame/Content/launcher.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

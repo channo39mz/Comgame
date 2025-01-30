@@ -238,27 +238,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\channo39mz\\.nuget\\packages\\": {}
+    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\channo39mz\\Desktop\\Comgame3\\Comgame.csproj",
+      "projectUniqueName": "c:\\Users\\ADMIN\\Desktop\\CS classes\\ThirdYear\\Term2\\ComGame\\Bubble Game (Alpha)\\Comgame\\Comgame.csproj",
       "projectName": "Comgame",
-      "projectPath": "C:\\Users\\channo39mz\\Desktop\\Comgame3\\Comgame.csproj",
-      "packagesPath": "C:\\Users\\channo39mz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\channo39mz\\Desktop\\Comgame3\\obj\\",
+      "projectPath": "c:\\Users\\ADMIN\\Desktop\\CS classes\\ThirdYear\\Term2\\ComGame\\Bubble Game (Alpha)\\Comgame\\Comgame.csproj",
+      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\ADMIN\\Desktop\\CS classes\\ThirdYear\\Term2\\ComGame\\Bubble Game (Alpha)\\Comgame\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\channo39mz\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -275,8 +272,9 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "direct"
-      }
+        "auditMode": "all"
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -302,12 +300,30 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.11, 8.0.11]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[8.0.11, 8.0.11]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.11, 8.0.11]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[8.0.11, 8.0.11]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

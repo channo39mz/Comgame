@@ -17,6 +17,11 @@ public class MainScene : Game
     private Texture2D _launcherTexture;
     private Launcher _launcher;
     private Dictionary<Bubble.BubbleColor, Texture2D> _bubbleTextures;
+    private Texture2D[] _backgroundTextures;
+    private int _currentBgIndex = 0;
+    private double _bgTimer = 0;
+    private double _bgInterval = 0.5; // Time interval in seconds (adjust as needed)
+
 
     public MainScene()
     {
@@ -49,6 +54,16 @@ public class MainScene : Game
         };
         Bubble.LoadTextures(_bubbleTextures);
 
+        _backgroundTextures = new Texture2D[6]
+        {
+            Content.Load<Texture2D>("bg_0"),
+            Content.Load<Texture2D>("bg_1"),
+            Content.Load<Texture2D>("bg_2"),
+            Content.Load<Texture2D>("bg_3"),
+            Content.Load<Texture2D>("bg_4"),
+            Content.Load<Texture2D>("bg_5"),
+        };
+
         _launcherTexture = Content.Load<Texture2D>("launcher");
 
         _rectTexture = new Texture2D(_graphics.GraphicsDevice, 1, 1);
@@ -67,9 +82,17 @@ public class MainScene : Game
         if (keyboardState.IsKeyDown(Keys.Escape))
             Exit();
 
- 
+
 
         _launcher.Update(gameTime);
+
+        // Update background animation timer
+        _bgTimer += gameTime.ElapsedGameTime.TotalSeconds;
+        if (_bgTimer >= _bgInterval)
+        {
+            _currentBgIndex = (_currentBgIndex + 1) % _backgroundTextures.Length;
+            _bgTimer = 0;
+        }
 
         Singleton.Instance.PreviousKey = Singleton.Instance.CurrentKey;
 
@@ -81,13 +104,13 @@ public class MainScene : Game
         GraphicsDevice.Clear(Color.Black);
         _spriteBatch.Begin();
 
-        // Draw game board background
-        _spriteBatch.Draw(_rectTexture, Vector2.Zero, null, Color.Black, 0f, Vector2.Zero,
-            new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE, Singleton.GAMEHEIGHT * Singleton.TILESIZE), SpriteEffects.None, 0f);
+        // Calculate the scale factors to fit the background to the game area
+        float scaleX = (float)(Singleton.GAMEWIDTH * Singleton.TILESIZE) / _backgroundTextures[_currentBgIndex].Width;
+        float scaleY = (float)(Singleton.SCREENHEIGHT * Singleton.TILESIZE) / _backgroundTextures[_currentBgIndex].Height;
 
-        // Draw launcher area background
-        _spriteBatch.Draw(_rectTexture, new Vector2(0f, Singleton.GAMEHEIGHT * Singleton.TILESIZE), null, Color.Black, 0f, Vector2.Zero,
-            new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE, Singleton.LAUNCHERHEIGHT * Singleton.TILESIZE), SpriteEffects.None, 0f);
+        // Draw game board background
+        _spriteBatch.Draw(_backgroundTextures[_currentBgIndex], Vector2.Zero, null, Color.White, 0f, Vector2.Zero,
+            new Vector2(scaleX,scaleY), SpriteEffects.None, 0f);
 
         // Draw score area background
         _spriteBatch.Draw(_rectTexture, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE, 0f), null, Color.DimGray, 0f, Vector2.Zero,

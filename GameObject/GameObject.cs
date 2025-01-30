@@ -27,6 +27,13 @@ class GameObject
 		Scale = Vector2.One;
 		Rotation = 0f;
 	}
+	public GameObject()
+	{
+		Position = Vector2.Zero;
+		Scale = Vector2.One;
+		Rotation = 0f;
+	}
+
 
 	public virtual void Update(GameTime gameTime)
 	{

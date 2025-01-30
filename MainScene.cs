@@ -62,11 +62,12 @@ public class MainScene : Game
     protected override void Update(GameTime gameTime)
     {
         var keyboardState = Keyboard.GetState();
-
         Singleton.Instance.CurrentKey = keyboardState;
 
         if (keyboardState.IsKeyDown(Keys.Escape))
             Exit();
+
+ 
 
         _launcher.Update(gameTime);
 

@@ -17,10 +17,18 @@ class Bubble : GameObject
 	public BubbleColor CurrentColor { get; private set; }
 	private static Dictionary<BubbleColor, Texture2D> _bubbleTextures;
 
-	public Bubble(Vector2 position) : base(_bubbleTextures[GetRandomColor()])
+	public Bubble(Vector2 position , BubbleColor color)
+	{
+		Position = position;
+		CurrentColor = color;
+		_texture = _bubbleTextures[CurrentColor];
+	}
+
+	public Bubble(Vector2 position)
 	{
 		Position = position;
 		CurrentColor = GetRandomColor();
+		_texture = _bubbleTextures[CurrentColor];
 	}
 
 	public static void LoadTextures(Dictionary<BubbleColor, Texture2D> textures)

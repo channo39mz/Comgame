@@ -64,7 +64,7 @@ class MovingBubble : Bubble
             col--;
 
         // Check upper and right-upper cell for odd rows
-        if (!Singleton.IsRowEven(row) && Singleton.Instance.GameBoard[col, row - 1] == null && Singleton.Instance.GameBoard[col + 1, row - 1] == null)
+        if (!Singleton.IsRowEven(row) && row != 0 && Singleton.Instance.GameBoard[col, row - 1] == null && Singleton.Instance.GameBoard[col + 1, row - 1] == null)
         {
             Console.WriteLine("hit!");
             col--;

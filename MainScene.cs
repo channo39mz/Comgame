@@ -25,8 +25,10 @@ public class MainScene : Game
 
     private Rectangle playButtonRect;
     private Rectangle exitButtonRect;
+    private Rectangle playAgainButtonRect;
     private Rectangle restartButtonRect;
     private Rectangle menuButtonRect;
+
 
 
     public MainScene()
@@ -52,6 +54,7 @@ public class MainScene : Game
         playButtonRect = new Rectangle(centerX, centerY - 50, buttonWidth, buttonHeight);
         exitButtonRect = new Rectangle(centerX, centerY + 50, buttonWidth, buttonHeight);
 
+        playAgainButtonRect = new Rectangle(centerX, _graphics.PreferredBackBufferHeight / 2, buttonWidth, buttonHeight);
         restartButtonRect = new Rectangle(centerX, _graphics.PreferredBackBufferHeight / 2, buttonWidth, buttonHeight);
         menuButtonRect = new Rectangle(centerX, _graphics.PreferredBackBufferHeight / 2 + 100, buttonWidth, buttonHeight);
 
@@ -110,6 +113,11 @@ public class MainScene : Game
         {
             _launcher.Update(gameTime);
 
+            if (Singleton.IsGameBoardEmpty())
+            {
+                Singleton.Instance.CurrentGameState = Singleton.GameState.GameWon;
+            }
+
             // Update background animation timer
             _bgTimer += gameTime.ElapsedGameTime.TotalSeconds;
             if (_bgTimer >= _bgInterval)
@@ -143,6 +151,23 @@ public class MainScene : Game
                 }
             }
         }
+        else if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon)
+        {
+            MouseState mouseState = Mouse.GetState();
+            if (mouseState.LeftButton == ButtonState.Pressed)
+            {
+                Point mousePoint = new Point(mouseState.X, mouseState.Y);
+                if (playAgainButtonRect.Contains(mousePoint))
+                {
+                    Reset(gameTime);
+                    Singleton.Instance.CurrentGameState = Singleton.GameState.InGame;
+                }
+                else if (menuButtonRect.Contains(mousePoint))
+                {
+                    Singleton.Instance.CurrentGameState = Singleton.GameState.MainMenu;
+                }
+            }
+        }
 
         Singleton.Instance.PreviousKey = Singleton.Instance.CurrentKey;
 
@@ -166,6 +191,11 @@ public class MainScene : Game
         {
             DrawGameOverScreen();
         }
+        else if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose)
+        {
+            DrawGameWonScreen();
+        }
+
 
         _spriteBatch.End();
         base.Draw(gameTime);
@@ -364,5 +394,12 @@ public class MainScene : Game
         DrawButton(menuButtonRect, "Main Menu");
     }
 
+    private void DrawGameWonScreen()
+    {
+        string gameWonText = "You Won!";
+        _spriteBatch.DrawString(_font, gameWonText, new Vector2((_graphics.PreferredBackBufferWidth - _font.MeasureString(gameWonText).X) / 2, 150), Color.Red);
 
+        DrawButton(playAgainButtonRect, "Play Again");
+        DrawButton(menuButtonRect, "Main Menu");
+    }
 }

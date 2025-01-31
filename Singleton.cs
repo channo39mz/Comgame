@@ -132,7 +132,7 @@ class Singleton
 		{
 			instance.GameBoard[x, 0] = null;
 		}
-		
+
 		// Console.WriteLine("======= After Move Down =======");
 		// printgameboard();
 		// Console.WriteLine("======= After Move Down =======");
@@ -158,6 +158,22 @@ class Singleton
 	public static bool IsRowEven(int rowIndex)
 	{
 		return instance.IsTopRowEven ? (rowIndex % 2 == 0) : (rowIndex % 2 != 0);
+	}
+
+	public static bool IsGameBoardEmpty()
+	{
+		for (int y = 0; y < GAMEHEIGHT; y++)
+		{
+			for (int x = 0; x < GAMEWIDTH; x++)
+			{
+				if (Instance.GameBoard[x, y] != null)
+				{
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 }

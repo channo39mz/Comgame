@@ -1,9 +1,10 @@
 ﻿using Comgame.GameObject;
+using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
+using System.IO;
 
 namespace Comgame;
 
@@ -21,6 +22,8 @@ public class MainScene : Game
     private int _currentBgIndex = 0;
     private double _bgTimer = 0;
     private double _bgInterval = 0.5; // Time interval in seconds (adjust as needed)
+
+    // private int Singleton.Instance._score= 0;
 
 
     public MainScene()
@@ -79,8 +82,10 @@ public class MainScene : Game
         var keyboardState = Keyboard.GetState();
         Singleton.Instance.CurrentKey = keyboardState;
 
-        if (keyboardState.IsKeyDown(Keys.Escape))
+        if (keyboardState.IsKeyDown(Keys.Escape)){
+            if (Singleton.Instance._score> readHighScore()) saveHighScore();
             Exit();
+        }
 
 
 
@@ -132,15 +137,32 @@ public class MainScene : Game
         _launcher.Draw(_spriteBatch);
 
         // Draw text
-        _spriteBatch.DrawString(_font, "Next:", new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE), Color.White);
+        _spriteBatch.DrawString(_font, "Next: ", new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE), Color.White);
+
+        //draw score text
+        _spriteBatch.DrawString(_font, "Score: " + Singleton.Instance._score, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 100), Color.White);
+
+        //draw high score text
+        _spriteBatch.DrawString(_font, "Highscore: " + Singleton.Instance._highScore, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 200), Color.White);
+
+
+        //draw time elapsed
+        _spriteBatch.DrawString(_font, "Time: " + gameTime.TotalGameTime.TotalSeconds!, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 300), Color.White);
+
+        //draw best time
+        _spriteBatch.DrawString(_font, "Best Time: " + Singleton.Instance._bestTime, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 400), Color.White);
 
         _spriteBatch.End();
         base.Draw(gameTime);
+
+
     }
 
     protected void Reset()
     {
-        _launcher = new Launcher(_launcherTexture, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE / 2, (Singleton.GAMEHEIGHT + 1) * Singleton.TILESIZE));
+        if (Singleton.Instance._score> readHighScore()) saveHighScore();
+        loadHighScore();
+        _launcher = new Launcher(_launcherTexture, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE / 2, (Singleton.GAMEHEIGHT + 1) * Singleton.TILESIZE), this);
         Singleton.Instance.GameBoard = new Bubble[Singleton.GAMEWIDTH, Singleton.GAMEHEIGHT];
 
         // Initialize bubbles in a zigzag pattern with decreasing count per row
@@ -168,5 +190,57 @@ public class MainScene : Game
             }
             Console.WriteLine(row);
         }
+    }
+
+    protected void loadHighScore()
+    {
+        // Load score from file
+        if (File.Exists(Singleton.SCOREFILE))
+        {
+            string[] lines = File.ReadAllLines(Singleton.SCOREFILE);
+            if (lines.Length > 0)
+            {
+                Singleton.Instance._highScore= int.Parse(lines[0]);
+            }
+        }
+    }
+
+    protected void loadBestTime()
+    {
+        // Load score from file
+        if (File.Exists(Singleton.BESTTIMEFILE))
+        {
+            string[] lines = File.ReadAllLines(Singleton.BESTTIMEFILE);
+            if (lines.Length > 0)
+            {
+                Singleton.Instance._highScore= int.Parse(lines[0]);
+            }
+        }
+    }
+
+    protected void saveHighScore()
+    {
+        // Save score to file
+        File.WriteAllText(Singleton.SCOREFILE, Singleton.Instance._score.ToString());
+    }
+
+    protected int readHighScore()
+    {
+        // Read score from file
+        if (File.Exists(Singleton.SCOREFILE))
+        {
+            string[] lines = File.ReadAllLines(Singleton.SCOREFILE);
+            if (lines.Length > 0)
+            {
+                return int.Parse(lines[0]);
+            }
+        }
+        return 0;
+    }
+
+    public void IncreaseScore(int score)
+    {
+        Singleton.Instance._score+= score;
+        Console.WriteLine(Singleton.Instance._score);
     }
 }

@@ -1,5 +1,5 @@
 using System;
-using System.Numerics;
+using Microsoft.Xna.Framework;
 using Comgame.GameObject;
 using Microsoft.Xna.Framework.Input;
 
@@ -9,7 +9,11 @@ class Singleton
 {
 	private static Singleton instance;
 
-	public const string WINDOWTITLE = "Bubble Shooter";
+	public const string WINDOWTITLE = "Shoot that asteroid like his those balls!";
+
+	public const string SCOREFILE = "./Content/highscore.txt";
+
+	public const string BESTTIMEFILE = "./Content/besttime.txt";
 	public const int TILESIZE = 48;
 	public const int GAMEWIDTH = 8;
 	public const int GAMEHEIGHT = 10;
@@ -21,6 +25,10 @@ class Singleton
 	public const int INITIALROWS = 4;
 	public const double DROP_INTERVAL = 5.0;
 
+	public int _score = 0;
+	public int _highScore = 0;
+
+	public TimeOnly _bestTime = new TimeOnly(0, 0, 0);
 	public MovingBubble CurrentBubble;
 
 	public MovingBubble NextBubble;

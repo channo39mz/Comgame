@@ -9,10 +9,13 @@ class MovingBubble : Bubble
 {
     public Vector2 Velocity;
     public bool HasStopped { get; private set; }
+    private MainScene _mainScene;
+    private int comboDestroyCount = 0;
 
-    public MovingBubble(Vector2 position) : base(position)
+    public MovingBubble(Vector2 position, MainScene mainScene) : base(position)
     {
         HasStopped = false;
+        _mainScene = mainScene;
     }
 
     public override void Update(GameTime gameTime)
@@ -94,8 +97,11 @@ class MovingBubble : Bubble
         if (CheckAndDestroyBubbles(col, row, CurrentColor) >= 3)
         {
             FloodFillDestroy(col, row, CurrentColor);
+            
             DestroyFloatingBubbles(); // ลบ Bubble ที่ลอยอยู่
         }
+        Singleton.Instance._score += comboDestroyCount * 10;
+        comboDestroyCount = 0;
         Singleton.rendergameboard();
     }
 
@@ -120,9 +126,13 @@ class MovingBubble : Bubble
                 if (Singleton.Instance.GameBoard[x, y] != null && !connectedToTop.Contains((x, y)))
                 {
                     Singleton.Instance.GameBoard[x, y] = null;
+                    
                 }
+                
+                
             }
         }
+                    
     }
 
     private void MarkConnectedBubbles(int col, int row, HashSet<(int, int)> visited)
@@ -202,6 +212,7 @@ class MovingBubble : Bubble
 
         // ลบ Bubble นี้ออกจากบอร์ด
         Singleton.Instance.GameBoard[col, row] = null;
+        comboDestroyCount++;
 
         // ค้นหาทาง 6 ทิศทางใน Hex Grid
         FloodFillDestroy(col - 1, row, targetColor); // ซ้าย

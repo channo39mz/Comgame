@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Comgame.GameObject;
 
@@ -9,14 +10,12 @@ class MovingBubble : Bubble
 {
     public Vector2 Velocity;
     public bool HasStopped { get; private set; }
-
     public MovingBubble(Vector2 position) : base(position)
     {
         //Console.WriteLine(CurrentColor);
         Velocity = new Vector2(0f, -300f); // เคลื่อนที่ขึ้นไปข้างบน
         HasStopped = false;
     }
-
     public override void Update(GameTime gameTime)
     {
         if (HasStopped)
@@ -85,6 +84,8 @@ class MovingBubble : Bubble
         {
             FloodFillDestroy(col, row, CurrentColor);
             DestroyFloatingBubbles(); // ลบ Bubble ที่ลอยอยู่
+            Singleton.Instance.exploded.Play(0.1f,0.0f,0.0f);
+            
         }
         Singleton.rendergameboard();
     }
@@ -192,6 +193,8 @@ class MovingBubble : Bubble
 
         // ลบ Bubble นี้ออกจากบอร์ด
         Singleton.Instance.GameBoard[col, row] = null;
+
+        
 
         // ค้นหาทาง 6 ทิศทางใน Hex Grid
         FloodFillDestroy(col - 1, row, targetColor); // ซ้าย

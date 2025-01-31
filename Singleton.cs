@@ -1,6 +1,7 @@
 using System;
 using System.Numerics;
 using Comgame.GameObject;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 
 namespace Comgame;
@@ -28,6 +29,7 @@ class Singleton
 	public Bubble[,] GameBoard;
 
 	public KeyboardState PreviousKey, CurrentKey;
+	public SoundEffect exploded;
 
 	public Random Random = new Random();
 

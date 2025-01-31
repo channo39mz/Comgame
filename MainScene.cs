@@ -1,7 +1,9 @@
 ﻿using Comgame.GameObject;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 
@@ -21,6 +23,11 @@ public class MainScene : Game
     private int _currentBgIndex = 0;
     private double _bgTimer = 0;
     private double _bgInterval = 0.5; // Time interval in seconds (adjust as needed)
+    private Song song;
+    public SoundEffect exploded;
+    private int counterforexploded = 0;
+    private int preCount = 0;
+    private float volumn = 0.25f;
 
 
     public MainScene()
@@ -44,7 +51,10 @@ public class MainScene : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+        song = Content.Load<Song>("Audio/bgm_main");
+        Singleton.Instance.exploded = Content.Load<SoundEffect>("Audio/exploded");
+        MediaPlayer.Play(song); //Backgound Music play
+        MediaPlayer.Volume = volumn; //Background Music Volumn
         _bubbleTextures = new Dictionary<Bubble.BubbleColor, Texture2D>
         {
             { Bubble.BubbleColor.RED, Content.Load<Texture2D>("bubble_red") },
@@ -165,6 +175,9 @@ public class MainScene : Game
             for (int x = 0; x < Singleton.GAMEWIDTH; x++)
             {
                 row += Singleton.Instance.GameBoard[x, y] != null ? "O " : ". ";
+                if(Singleton.Instance.GameBoard[x, y] != null){
+                    counterforexploded++;
+                }
             }
             Console.WriteLine(row);
         }

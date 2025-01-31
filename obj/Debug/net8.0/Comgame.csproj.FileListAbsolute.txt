@@ -132,3 +132,46 @@ c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Co
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\obj\Debug\net8.0\Comgame.pdb
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\obj\Debug\net8.0\Comgame.genruntimeconfig.cache
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\obj\Debug\net8.0\ref\Comgame.dll
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\bg_0.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\bg_1.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\bg_2.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\bg_3.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\bg_4.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\bg_5.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\bubble.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\bubble_blue.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\bubble_green.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\bubble_red.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\bubble_yellow.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\GameFont.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\launcher.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Comgame.exe
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Comgame.deps.json
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Comgame.runtimeconfig.json
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Comgame.dll
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Comgame.pdb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\MonoGame.Framework.dll
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\NVorbis.dll
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\runtimes\linux-x64\native\libopenal.so.1
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\runtimes\osx\native\libopenal.1.dylib
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\runtimes\win-x64\native\soft_oal.dll
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\runtimes\win-x86\native\soft_oal.dll
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\runtimes\linux-x64\native\libSDL2-2.0.so.0
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\runtimes\osx\native\libSDL2.dylib
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\runtimes\win-x64\native\SDL2.dll
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\obj\Debug\net8.0\Comgame.csproj.AssemblyReference.cache
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\obj\Debug\net8.0\Comgame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\obj\Debug\net8.0\Comgame.AssemblyInfoInputs.cache
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\obj\Debug\net8.0\Comgame.AssemblyInfo.cs
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\obj\Debug\net8.0\Comgame.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\obj\Debug\net8.0\Comgame.sourcelink.json
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\obj\Debug\net8.0\Comgame.csproj.Up2Date
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\obj\Debug\net8.0\Comgame.dll
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\obj\Debug\net8.0\refint\Comgame.dll
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\obj\Debug\net8.0\Comgame.pdb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\obj\Debug\net8.0\Comgame.genruntimeconfig.cache
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\obj\Debug\net8.0\ref\Comgame.dll
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\bgm_main.ogg
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\bgm_main.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\exploded.ogg
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\exploded.xnb

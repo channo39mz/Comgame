@@ -23,8 +23,8 @@ public class MainScene : Game
     private double _bgTimer = 0;
     private double _bgInterval = 0.5; // Time interval in seconds (adjust as needed)
 
-    // private int Singleton.Instance._score= 0;
-
+    private Rectangle playButtonRect;
+    private Rectangle exitButtonRect;
 
     public MainScene()
     {
@@ -40,6 +40,14 @@ public class MainScene : Game
         _graphics.ApplyChanges();
 
         Window.Title = Singleton.WINDOWTITLE;
+
+        int buttonWidth = 200;
+        int buttonHeight = 60;
+        int centerX = (_graphics.PreferredBackBufferWidth - buttonWidth) / 2;
+        int centerY = _graphics.PreferredBackBufferHeight / 2;
+
+        playButtonRect = new Rectangle(centerX, centerY - 50, buttonWidth, buttonHeight);
+        exitButtonRect = new Rectangle(centerX, centerY + 50, buttonWidth, buttonHeight);
 
         base.Initialize();
     }
@@ -82,30 +90,36 @@ public class MainScene : Game
         var keyboardState = Keyboard.GetState();
         Singleton.Instance.CurrentKey = keyboardState;
 
-        if (keyboardState.IsKeyDown(Keys.Escape)){
-            if (Singleton.Instance._score> readHighScore()) saveHighScore();
+        if (keyboardState.IsKeyDown(Keys.Escape))
+        {
+            if (Singleton.Instance._score > readHighScore()) saveHighScore();
             Exit();
         }
 
-
-
-        _launcher.Update(gameTime);
-
-        // Update background animation timer
-        _bgTimer += gameTime.ElapsedGameTime.TotalSeconds;
-        if (_bgTimer >= _bgInterval)
+        if (Singleton.Instance.CurrentGameState == Singleton.GameState.MainMenu)
         {
-            _currentBgIndex = (_currentBgIndex + 1) % _backgroundTextures.Length;
-            _bgTimer = 0;
+            HandleMenuInput(gameTime);
         }
+        else if (Singleton.Instance.CurrentGameState == Singleton.GameState.InGame)
+        {
+            _launcher.Update(gameTime);
 
-        // Singleton.Instance.CeilingDropTimer += gameTime.ElapsedGameTime.TotalSeconds;
+            // Update background animation timer
+            _bgTimer += gameTime.ElapsedGameTime.TotalSeconds;
+            if (_bgTimer >= _bgInterval)
+            {
+                _currentBgIndex = (_currentBgIndex + 1) % _backgroundTextures.Length;
+                _bgTimer = 0;
+            }
 
-        // if (Singleton.Instance.CeilingDropTimer >= Singleton.CEILING_DROP_INTERVAL)
-        // {
-        //     Singleton.DropCeiling();
-        //     Singleton.Instance.CeilingDropTimer = 0.0; // Reset timer after dropping ceiling
-        // }
+            // Singleton.Instance.CeilingDropTimer += gameTime.ElapsedGameTime.TotalSeconds;
+
+            // if (Singleton.Instance.CeilingDropTimer >= Singleton.CEILING_DROP_INTERVAL)
+            // {
+            //     Singleton.DropCeiling();
+            //     Singleton.Instance.CeilingDropTimer = 0.0; // Reset timer after dropping ceiling
+            // }
+        }
 
         Singleton.Instance.PreviousKey = Singleton.Instance.CurrentKey;
 
@@ -116,6 +130,147 @@ public class MainScene : Game
     {
         GraphicsDevice.Clear(Color.Black);
         _spriteBatch.Begin();
+
+        if (Singleton.Instance.CurrentGameState == Singleton.GameState.MainMenu)
+        {
+            DrawMainMenu();
+        }
+        else if (Singleton.Instance.CurrentGameState == Singleton.GameState.InGame)
+        {
+            DrawGame(gameTime);
+        }
+
+        _spriteBatch.End();
+        base.Draw(gameTime);
+    }
+
+    protected void Reset()
+    {
+        if (Singleton.Instance._score > readHighScore()) saveHighScore();
+        loadHighScore();
+        _launcher = new Launcher(_launcherTexture, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE / 2, (Singleton.GAMEHEIGHT + 1) * Singleton.TILESIZE), this);
+        Singleton.Instance.GameBoard = new Bubble[Singleton.GAMEWIDTH, Singleton.GAMEHEIGHT];
+
+        // Initialize bubbles in a zigzag pattern with decreasing count per row
+        for (int y = 0; y < Singleton.INITIALROWS; y++)
+        {
+            int bubbleCount = Singleton.GAMEWIDTH - (y % 2);
+            for (int x = 0; x < bubbleCount; x++)
+            {
+                float offsetX = (y % 2 == 0) ? 0 : Singleton.TILESIZE / 2;
+                float offsetY = y * Singleton.TILESIZE * 0.866f; // Reduce vertical gap for hexagonal layout (0.866f = sqrt(3)/2)
+                var bubble = new Bubble(new Vector2(x * Singleton.TILESIZE + offsetX, offsetY));
+
+                Singleton.Instance.GameBoard[x, y] = bubble;
+            }
+        }
+
+        // Print GameBoard structure to console
+        Console.WriteLine("GameBoard Initialization:");
+        for (int y = 0; y < Singleton.INITIALROWS; y++)
+        {
+            string row = "";
+            for (int x = 0; x < Singleton.GAMEWIDTH; x++)
+            {
+                row += Singleton.Instance.GameBoard[x, y] != null ? "O " : ". ";
+            }
+            Console.WriteLine(row);
+        }
+    }
+
+    protected void loadHighScore()
+    {
+        // Load score from file
+        if (File.Exists(Singleton.SCOREFILE))
+        {
+            string[] lines = File.ReadAllLines(Singleton.SCOREFILE);
+            if (lines.Length > 0)
+            {
+                Singleton.Instance._highScore = int.Parse(lines[0]);
+            }
+        }
+    }
+
+    protected void loadBestTime()
+    {
+        // Load score from file
+        if (File.Exists(Singleton.BESTTIMEFILE))
+        {
+            string[] lines = File.ReadAllLines(Singleton.BESTTIMEFILE);
+            if (lines.Length > 0)
+            {
+                Singleton.Instance._highScore = int.Parse(lines[0]);
+            }
+        }
+    }
+
+    protected void saveHighScore()
+    {
+        // Save score to file
+        File.WriteAllText(Singleton.SCOREFILE, Singleton.Instance._score.ToString());
+    }
+
+    protected int readHighScore()
+    {
+        // Read score from file
+        if (File.Exists(Singleton.SCOREFILE))
+        {
+            string[] lines = File.ReadAllLines(Singleton.SCOREFILE);
+            if (lines.Length > 0)
+            {
+                return int.Parse(lines[0]);
+            }
+        }
+        return 0;
+    }
+
+    public void IncreaseScore(int score)
+    {
+        Singleton.Instance._score += score;
+        Console.WriteLine(Singleton.Instance._score);
+    }
+
+    private void HandleMenuInput(GameTime gameTime)
+    {
+        MouseState mouseState = Mouse.GetState();
+        if (mouseState.LeftButton == ButtonState.Pressed)
+        {
+            Point mousePoint = new Point(mouseState.X, mouseState.Y);
+            if (playButtonRect.Contains(mousePoint))
+            {
+                Singleton.Instance.GameStartTime = gameTime.TotalGameTime.TotalSeconds;
+                Singleton.Instance.CurrentGameState = Singleton.GameState.InGame;
+
+            }
+            else if (exitButtonRect.Contains(mousePoint))
+            {
+                Exit();
+            }
+        }
+    }
+
+    private void DrawMainMenu()
+    {
+        string titleText = "Puzzle Bobble";
+        _spriteBatch.DrawString(_font, titleText, new Vector2((_graphics.PreferredBackBufferWidth - _font.MeasureString(titleText).X) / 2, 120), Color.White);
+
+        DrawButton(playButtonRect, "Play");
+        DrawButton(exitButtonRect, "Exit");
+    }
+
+    private void DrawButton(Rectangle rect, string text)
+    {
+        _spriteBatch.Draw(_rectTexture, rect, Color.Gray);
+        Vector2 textSize = _font.MeasureString(text);
+        Vector2 textPosition = new Vector2(
+            rect.X + (rect.Width - textSize.X) / 2,
+            rect.Y + (rect.Height - textSize.Y) / 2
+        );
+        _spriteBatch.DrawString(_font, text, textPosition, Color.White);
+    }
+
+    private void DrawGame(GameTime gameTime)
+    {
 
         // Calculate the scale factors to fit the background to the game area
         float scaleX = (float)(Singleton.GAMEWIDTH * Singleton.TILESIZE) / _backgroundTextures[_currentBgIndex].Width;
@@ -157,102 +312,11 @@ public class MainScene : Game
         //draw high score text
         _spriteBatch.DrawString(_font, "Highscore: " + Singleton.Instance._highScore, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 200), Color.White);
 
-
         //draw time elapsed
-        _spriteBatch.DrawString(_font, "Time: " + gameTime.TotalGameTime.TotalSeconds!, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 300), Color.White);
+        _spriteBatch.DrawString(_font, "Time: " + Math.Round(gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime), new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 300), Color.White);
 
         //draw best time
         _spriteBatch.DrawString(_font, "Best Time: " + Singleton.Instance._bestTime, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 400), Color.White);
-
-        _spriteBatch.End();
-        base.Draw(gameTime);
-
-
     }
 
-    protected void Reset()
-    {
-        if (Singleton.Instance._score> readHighScore()) saveHighScore();
-        loadHighScore();
-        _launcher = new Launcher(_launcherTexture, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE / 2, (Singleton.GAMEHEIGHT + 1) * Singleton.TILESIZE), this);
-        Singleton.Instance.GameBoard = new Bubble[Singleton.GAMEWIDTH, Singleton.GAMEHEIGHT];
-
-        // Initialize bubbles in a zigzag pattern with decreasing count per row
-        for (int y = 0; y < Singleton.INITIALROWS; y++)
-        {
-            int bubbleCount = Singleton.GAMEWIDTH - (y % 2);
-            for (int x = 0; x < bubbleCount; x++)
-            {
-                float offsetX = (y % 2 == 0) ? 0 : Singleton.TILESIZE / 2;
-                float offsetY = y * Singleton.TILESIZE * 0.866f; // Reduce vertical gap for hexagonal layout (0.866f = sqrt(3)/2)
-                var bubble = new Bubble(new Vector2(x * Singleton.TILESIZE + offsetX, offsetY));
-
-                Singleton.Instance.GameBoard[x, y] = bubble;
-            }
-        }
-
-        // Print GameBoard structure to console
-        Console.WriteLine("GameBoard Initialization:");
-        for (int y = 0; y < Singleton.INITIALROWS; y++)
-        {
-            string row = "";
-            for (int x = 0; x < Singleton.GAMEWIDTH; x++)
-            {
-                row += Singleton.Instance.GameBoard[x, y] != null ? "O " : ". ";
-            }
-            Console.WriteLine(row);
-        }
-    }
-
-    protected void loadHighScore()
-    {
-        // Load score from file
-        if (File.Exists(Singleton.SCOREFILE))
-        {
-            string[] lines = File.ReadAllLines(Singleton.SCOREFILE);
-            if (lines.Length > 0)
-            {
-                Singleton.Instance._highScore= int.Parse(lines[0]);
-            }
-        }
-    }
-
-    protected void loadBestTime()
-    {
-        // Load score from file
-        if (File.Exists(Singleton.BESTTIMEFILE))
-        {
-            string[] lines = File.ReadAllLines(Singleton.BESTTIMEFILE);
-            if (lines.Length > 0)
-            {
-                Singleton.Instance._highScore= int.Parse(lines[0]);
-            }
-        }
-    }
-
-    protected void saveHighScore()
-    {
-        // Save score to file
-        File.WriteAllText(Singleton.SCOREFILE, Singleton.Instance._score.ToString());
-    }
-
-    protected int readHighScore()
-    {
-        // Read score from file
-        if (File.Exists(Singleton.SCOREFILE))
-        {
-            string[] lines = File.ReadAllLines(Singleton.SCOREFILE);
-            if (lines.Length > 0)
-            {
-                return int.Parse(lines[0]);
-            }
-        }
-        return 0;
-    }
-
-    public void IncreaseScore(int score)
-    {
-        Singleton.Instance._score+= score;
-        Console.WriteLine(Singleton.Instance._score);
-    }
 }

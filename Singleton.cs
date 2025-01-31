@@ -27,6 +27,7 @@ class Singleton
 
 	public int _score = 0;
 	public int _highScore = 0;
+	public double GameStartTime = 0;
 
 	public TimeOnly _bestTime = new TimeOnly(0, 0, 0);
 	public MovingBubble CurrentBubble;
@@ -49,6 +50,16 @@ class Singleton
 	public static bool IsCeilingDropping = false;
 	private static double CeilingDropProgress = 0.0;
 	private const double CeilingDropDuration = 0.5; // 0.5 seconds
+
+	public enum GameState
+	{
+		MainMenu,
+		InGame,
+		GameWon,
+		GameLose
+	}
+
+	public GameState CurrentGameState = GameState.MainMenu;
 
 
 	private Singleton()

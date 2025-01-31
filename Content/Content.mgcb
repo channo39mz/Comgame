@@ -92,3 +92,8 @@
 /processorParam:TextureFormat=Color
 /build:launcher.png
 
+#begin highscore.txt
+/copy:highscore.txt
+
+#begin besttime.txt
+/copy:besttime.txt

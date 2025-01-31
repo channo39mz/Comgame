@@ -22,7 +22,7 @@ class Singleton
 	public const int SCREENWIDTH = GAMEWIDTH + SCOREWIDTH;
 	public const int SCREENHEIGHT = GAMEHEIGHT + LAUNCHERHEIGHT;
 
-	public const int INITIALROWS = 4;
+	public const int INITIALROWS = 3;
 	public const double DROP_INTERVAL = 5.0;
 
 	public int Score = 0;
@@ -40,7 +40,7 @@ class Singleton
 
 	public Random Random = new Random();
 
-	public const int SHOTS_BEFORE_DROP = 5;
+	public const int SHOTS_BEFORE_DROP = 50;
 	public int ShotCounter = 0;
 
 	public bool IsTopRowEven = true;

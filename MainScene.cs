@@ -113,6 +113,12 @@ public class MainScene : Game
         {
             _launcher.Update(gameTime);
 
+            // Bypass
+            if (Singleton.Instance.ShotCounter == 10)
+            {
+                Singleton.Instance.CurrentGameState = Singleton.GameState.GameWon;
+            }
+
             if (Singleton.IsGameBoardEmpty())
             {
                 Singleton.Instance.CurrentGameState = Singleton.GameState.GameWon;
@@ -153,6 +159,12 @@ public class MainScene : Game
         }
         else if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon)
         {
+
+            if (Singleton.Instance.Score > readHighScore())
+                saveHighScore();
+            if ((gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime) > readBestTime())
+                saveBestTime(gameTime);
+
             MouseState mouseState = Mouse.GetState();
             if (mouseState.LeftButton == ButtonState.Pressed)
             {
@@ -191,7 +203,7 @@ public class MainScene : Game
         {
             DrawGameOverScreen();
         }
-        else if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose)
+        else if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon)
         {
             DrawGameWonScreen();
         }
@@ -203,7 +215,7 @@ public class MainScene : Game
 
     protected void Reset(GameTime gameTime = null)
     {
-        if (Singleton.Instance.Score > readHighScore()) saveHighScore();
+        loadBestTime();
         loadHighScore();
         _launcher = new Launcher(_launcherTexture, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE / 2, (Singleton.GAMEHEIGHT + 1) * Singleton.TILESIZE));
         Singleton.Instance.GameBoard = new Bubble[Singleton.GAMEWIDTH, Singleton.GAMEHEIGHT];
@@ -265,7 +277,7 @@ public class MainScene : Game
             string[] lines = File.ReadAllLines(Singleton.BESTTIMEFILE);
             if (lines.Length > 0)
             {
-                Singleton.Instance.HighScore = int.Parse(lines[0]);
+                Singleton.Instance.BestTime = double.Parse(lines[0]);
             }
         }
     }
@@ -285,6 +297,26 @@ public class MainScene : Game
             if (lines.Length > 0)
             {
                 return int.Parse(lines[0]);
+            }
+        }
+        return 0;
+    }
+
+    protected void saveBestTime(GameTime gameTime)
+    {
+        // Save score to file
+        File.WriteAllText(Singleton.BESTTIMEFILE, (gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime).ToString());
+    }
+
+    protected double readBestTime()
+    {
+        // Read score from file
+        if (File.Exists(Singleton.BESTTIMEFILE))
+        {
+            string[] lines = File.ReadAllLines(Singleton.BESTTIMEFILE);
+            if (lines.Length > 0)
+            {
+                return double.Parse(lines[0]);
             }
         }
         return 0;
@@ -382,7 +414,7 @@ public class MainScene : Game
         _spriteBatch.DrawString(_font, "Time: " + Math.Round(gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime), new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 300), Color.White);
 
         //draw best time
-        _spriteBatch.DrawString(_font, "Best Time: " + Singleton.Instance.BestTime, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 400), Color.White);
+        _spriteBatch.DrawString(_font, "Best Time: " + Math.Round(Singleton.Instance.BestTime), new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 400), Color.White);
     }
 
     private void DrawGameOverScreen()
@@ -397,7 +429,7 @@ public class MainScene : Game
     private void DrawGameWonScreen()
     {
         string gameWonText = "You Won!";
-        _spriteBatch.DrawString(_font, gameWonText, new Vector2((_graphics.PreferredBackBufferWidth - _font.MeasureString(gameWonText).X) / 2, 150), Color.Red);
+        _spriteBatch.DrawString(_font, gameWonText, new Vector2((_graphics.PreferredBackBufferWidth - _font.MeasureString(gameWonText).X) / 2, 150), Color.Green);
 
         DrawButton(playAgainButtonRect, "Play Again");
         DrawButton(menuButtonRect, "Main Menu");

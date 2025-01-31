@@ -70,7 +70,7 @@ class MovingBubble : Bubble
             col--;
         }
 
-        // TODO: game ended
+        // game ended
         if (col >= Singleton.GAMEWIDTH || row >= Singleton.GAMEHEIGHT)
         {
             Singleton.Instance.CurrentGameState = Singleton.GameState.GameLose;

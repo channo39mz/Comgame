@@ -132,3 +132,9 @@ c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Co
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\obj\Debug\net8.0\Comgame.pdb
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\obj\Debug\net8.0\Comgame.genruntimeconfig.cache
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\obj\Debug\net8.0\ref\Comgame.dll
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bg_0.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bg_1.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bg_2.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bg_3.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bg_4.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bg_5.xnb

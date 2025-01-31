@@ -54,15 +54,15 @@ public class MainScene : Game
         };
         Bubble.LoadTextures(_bubbleTextures);
 
-        _backgroundTextures = new Texture2D[6]
-        {
+        _backgroundTextures =
+        [
             Content.Load<Texture2D>("bg_0"),
             Content.Load<Texture2D>("bg_1"),
             Content.Load<Texture2D>("bg_2"),
             Content.Load<Texture2D>("bg_3"),
             Content.Load<Texture2D>("bg_4"),
             Content.Load<Texture2D>("bg_5"),
-        };
+        ];
 
         _launcherTexture = Content.Load<Texture2D>("launcher");
 
@@ -94,6 +94,14 @@ public class MainScene : Game
             _bgTimer = 0;
         }
 
+        // Singleton.Instance.CeilingDropTimer += gameTime.ElapsedGameTime.TotalSeconds;
+
+        // if (Singleton.Instance.CeilingDropTimer >= Singleton.CEILING_DROP_INTERVAL)
+        // {
+        //     Singleton.DropCeiling();
+        //     Singleton.Instance.CeilingDropTimer = 0.0; // Reset timer after dropping ceiling
+        // }
+
         Singleton.Instance.PreviousKey = Singleton.Instance.CurrentKey;
 
         base.Update(gameTime);
@@ -110,7 +118,7 @@ public class MainScene : Game
 
         // Draw game board background
         _spriteBatch.Draw(_backgroundTextures[_currentBgIndex], Vector2.Zero, null, Color.White, 0f, Vector2.Zero,
-            new Vector2(scaleX,scaleY), SpriteEffects.None, 0f);
+            new Vector2(scaleX, scaleY), SpriteEffects.None, 0f);
 
         // Draw score area background
         _spriteBatch.Draw(_rectTexture, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE, 0f), null, Color.DimGray, 0f, Vector2.Zero,
@@ -127,6 +135,10 @@ public class MainScene : Game
                 }
             }
         }
+
+        // Draw launcher threshold
+        _spriteBatch.Draw(_rectTexture, new Vector2(0f, Singleton.GAMEHEIGHT * Singleton.TILESIZE), null, Color.White, 0f, Vector2.Zero,
+            new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE, 1f), SpriteEffects.None, 0f);
 
         // Draw launcher
         _launcher.Draw(_spriteBatch);

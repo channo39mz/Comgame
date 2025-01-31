@@ -12,8 +12,6 @@ class MovingBubble : Bubble
 
     public MovingBubble(Vector2 position) : base(position)
     {
-        //Console.WriteLine(CurrentColor);
-        Velocity = new Vector2(0f, -300f); // เคลื่อนที่ขึ้นไปข้างบน
         HasStopped = false;
     }
 
@@ -60,6 +58,20 @@ class MovingBubble : Bubble
         int col = (int)Math.Round(Position.X / Singleton.TILESIZE);
         int row = (int)Math.Round(Position.Y / (Singleton.TILESIZE * 0.866f)); // 0.866 = sqrt(3)/2
 
+        if (!Singleton.IsRowEven(row) && col == Singleton.GAMEWIDTH - 1)
+            col--;
+
+        // Check upper and right-upper cell for odd rows
+        if (!Singleton.IsRowEven(row) && Singleton.Instance.GameBoard[col, row - 1] == null && Singleton.Instance.GameBoard[col + 1, row - 1] == null)
+        {
+            Console.WriteLine("hit!");
+            col--;
+        }
+
+        // TODO: game ended
+        if (col >= Singleton.GAMEWIDTH || row >= Singleton.GAMEHEIGHT)
+            return;
+
         // ปรับตำแหน่งให้อยู่ตรงกลางของช่องในตาราง
         float offsetX = (row % 2 == 0) ? 0 : Singleton.TILESIZE / 2;
         Position = new Vector2(col * Singleton.TILESIZE + offsetX, row * Singleton.TILESIZE * 0.866f);
@@ -69,7 +81,6 @@ class MovingBubble : Bubble
         {
             // ถ้าช่องนี้ว่าง -> เพิ่ม Bubble ลงไป
             Singleton.Instance.GameBoard[col, row] = new Bubble(Position,CurrentColor);
-            //Console.WriteLine(CurrentColor + " moveing");
         }
         else
         {
@@ -78,7 +89,6 @@ class MovingBubble : Bubble
             if (newRow < Singleton.GAMEHEIGHT) // ตรวจสอบว่าไม่เกินขอบกระดาน
             {
                 Singleton.Instance.GameBoard[col, newRow] = new Bubble(new Vector2(Position.X, newRow * Singleton.TILESIZE * 0.866f) , CurrentColor);
-                //Console.WriteLine(CurrentColor + " moveing");
             }
         }
         if (CheckAndDestroyBubbles(col, row, CurrentColor) >= 3)

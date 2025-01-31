@@ -32,8 +32,16 @@ class Launcher : GameObject
         if (Singleton.Instance.CurrentBubble != null)
         {
             var bubble = Singleton.Instance.CurrentBubble;
-            bubble.Velocity = new Vector2((float)Math.Sin(_rotation), -(float)Math.Cos(_rotation)) * 300f;
+            bubble.Velocity = new Vector2((float)Math.Sin(_rotation), -(float)Math.Cos(_rotation)) * 600f;
             _movingBubbles.Add(bubble);
+
+            Singleton.Instance.ShotCounter++;
+            if (Singleton.Instance.ShotCounter >= Singleton.SHOTS_BEFORE_DROP)
+            {
+                Singleton.DropCeiling();
+            }
+
+
             Singleton.Instance.CurrentBubble = Singleton.Instance.NextBubble;
             Singleton.Instance.NextBubble = GenerateRandomBubble();
         }
@@ -47,7 +55,7 @@ class Launcher : GameObject
             _rotation -= 0.05f;
         if (keyboardState.IsKeyDown(Keys.Right))
             _rotation += 0.05f;
-        
+
         _rotation = MathHelper.Clamp(_rotation, -1.3f, 1.3f);
 
         if (keyboardState.IsKeyDown(Keys.Space) && Singleton.Instance.PreviousKey.IsKeyUp(Keys.Space))

@@ -9,13 +9,11 @@ class MovingBubble : Bubble
 {
     public Vector2 Velocity;
     public bool HasStopped { get; private set; }
-    private MainScene _mainScene;
     private int comboDestroyCount = 0;
 
-    public MovingBubble(Vector2 position, MainScene mainScene) : base(position)
+    public MovingBubble(Vector2 position) : base(position)
     {
         HasStopped = false;
-        _mainScene = mainScene;
     }
 
     public override void Update(GameTime gameTime)
@@ -25,8 +23,9 @@ class MovingBubble : Bubble
 
         Position += Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-        if (Position.X < 0 || Position.X >  (Singleton.GAMEWIDTH*Singleton.TILESIZE) - Singleton.TILESIZE){
-            Velocity = new Vector2(-Velocity.X,Velocity.Y);
+        if (Position.X < 0 || Position.X > (Singleton.GAMEWIDTH * Singleton.TILESIZE) - Singleton.TILESIZE)
+        {
+            Velocity = new Vector2(-Velocity.X, Velocity.Y);
             return;
         }
         if (Position.Y <= 0) // ชนขอบบน
@@ -54,7 +53,7 @@ class MovingBubble : Bubble
     }
 
     private void StopBubble()
-    { 
+    {
         HasStopped = true;
 
         // แปลงพิกัด Position ไปเป็นตำแหน่งในตาราง
@@ -73,7 +72,10 @@ class MovingBubble : Bubble
 
         // TODO: game ended
         if (col >= Singleton.GAMEWIDTH || row >= Singleton.GAMEHEIGHT)
+        {
+            Singleton.Instance.CurrentGameState = Singleton.GameState.GameLose;
             return;
+        }
 
         // ปรับตำแหน่งให้อยู่ตรงกลางของช่องในตาราง
         float offsetX = (row % 2 == 0) ? 0 : Singleton.TILESIZE / 2;
@@ -83,7 +85,7 @@ class MovingBubble : Bubble
         if (Singleton.Instance.GameBoard[col, row] == null)
         {
             // ถ้าช่องนี้ว่าง -> เพิ่ม Bubble ลงไป
-            Singleton.Instance.GameBoard[col, row] = new Bubble(Position,CurrentColor);
+            Singleton.Instance.GameBoard[col, row] = new Bubble(Position, CurrentColor);
         }
         else
         {
@@ -91,16 +93,16 @@ class MovingBubble : Bubble
             int newRow = row + 1;
             if (newRow < Singleton.GAMEHEIGHT) // ตรวจสอบว่าไม่เกินขอบกระดาน
             {
-                Singleton.Instance.GameBoard[col, newRow] = new Bubble(new Vector2(Position.X, newRow * Singleton.TILESIZE * 0.866f) , CurrentColor);
+                Singleton.Instance.GameBoard[col, newRow] = new Bubble(new Vector2(Position.X, newRow * Singleton.TILESIZE * 0.866f), CurrentColor);
             }
         }
         if (CheckAndDestroyBubbles(col, row, CurrentColor) >= 3)
         {
             FloodFillDestroy(col, row, CurrentColor);
-            
+
             DestroyFloatingBubbles(); // ลบ Bubble ที่ลอยอยู่
         }
-        Singleton.Instance._score += comboDestroyCount * 10;
+        Singleton.Instance.Score += comboDestroyCount * 10;
         comboDestroyCount = 0;
         Singleton.rendergameboard();
     }
@@ -126,13 +128,13 @@ class MovingBubble : Bubble
                 if (Singleton.Instance.GameBoard[x, y] != null && !connectedToTop.Contains((x, y)))
                 {
                     Singleton.Instance.GameBoard[x, y] = null;
-                    
+
                 }
-                
-                
+
+
             }
         }
-                    
+
     }
 
     private void MarkConnectedBubbles(int col, int row, HashSet<(int, int)> visited)

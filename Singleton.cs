@@ -25,11 +25,11 @@ class Singleton
 	public const int INITIALROWS = 4;
 	public const double DROP_INTERVAL = 5.0;
 
-	public int _score = 0;
-	public int _highScore = 0;
+	public int Score = 0;
+	public int HighScore = 0;
 	public double GameStartTime = 0;
 
-	public TimeOnly _bestTime = new TimeOnly(0, 0, 0);
+	public double BestTime = 0;
 	public MovingBubble CurrentBubble;
 
 	public MovingBubble NextBubble;
@@ -48,8 +48,6 @@ class Singleton
 	public const double CEILING_DROP_INTERVAL = 5.0; // Drop every 10 seconds (adjust as needed)
 	public double CeilingDropTimer = 0.0;
 	public static bool IsCeilingDropping = false;
-	private static double CeilingDropProgress = 0.0;
-	private const double CeilingDropDuration = 0.5; // 0.5 seconds
 
 	public enum GameState
 	{

@@ -12,14 +12,12 @@ class Launcher : GameObject
     private Vector2 _position;
     private List<MovingBubble> _movingBubbles;
 
-    private MainScene _mainScene;
 
-    public Launcher(Texture2D texture, Vector2 position, MainScene mainScene) : base(texture)
+    public Launcher(Texture2D texture, Vector2 position) : base(texture)
     {
         _position = position;
         _rotation = 0f;
         _movingBubbles = new List<MovingBubble>();
-        _mainScene = mainScene;
 
         Singleton.Instance.CurrentBubble = GenerateRandomBubble();
         Singleton.Instance.NextBubble = GenerateRandomBubble();
@@ -27,7 +25,7 @@ class Launcher : GameObject
 
     private MovingBubble GenerateRandomBubble()
     {
-        return new MovingBubble(new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 2, Singleton.TILESIZE), _mainScene);
+        return new MovingBubble(new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 2, Singleton.TILESIZE));
     }
 
     private void ShootBubble()

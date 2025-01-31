@@ -25,6 +25,9 @@ public class MainScene : Game
 
     private Rectangle playButtonRect;
     private Rectangle exitButtonRect;
+    private Rectangle restartButtonRect;
+    private Rectangle menuButtonRect;
+
 
     public MainScene()
     {
@@ -48,6 +51,9 @@ public class MainScene : Game
 
         playButtonRect = new Rectangle(centerX, centerY - 50, buttonWidth, buttonHeight);
         exitButtonRect = new Rectangle(centerX, centerY + 50, buttonWidth, buttonHeight);
+
+        restartButtonRect = new Rectangle(centerX, _graphics.PreferredBackBufferHeight / 2, buttonWidth, buttonHeight);
+        menuButtonRect = new Rectangle(centerX, _graphics.PreferredBackBufferHeight / 2 + 100, buttonWidth, buttonHeight);
 
         base.Initialize();
     }
@@ -92,7 +98,7 @@ public class MainScene : Game
 
         if (keyboardState.IsKeyDown(Keys.Escape))
         {
-            if (Singleton.Instance._score > readHighScore()) saveHighScore();
+            if (Singleton.Instance.Score > readHighScore()) saveHighScore();
             Exit();
         }
 
@@ -120,6 +126,23 @@ public class MainScene : Game
             //     Singleton.Instance.CeilingDropTimer = 0.0; // Reset timer after dropping ceiling
             // }
         }
+        else if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose)
+        {
+            MouseState mouseState = Mouse.GetState();
+            if (mouseState.LeftButton == ButtonState.Pressed)
+            {
+                Point mousePoint = new Point(mouseState.X, mouseState.Y);
+                if (restartButtonRect.Contains(mousePoint))
+                {
+                    Reset(gameTime);
+                    Singleton.Instance.CurrentGameState = Singleton.GameState.InGame;
+                }
+                else if (menuButtonRect.Contains(mousePoint))
+                {
+                    Singleton.Instance.CurrentGameState = Singleton.GameState.MainMenu;
+                }
+            }
+        }
 
         Singleton.Instance.PreviousKey = Singleton.Instance.CurrentKey;
 
@@ -139,17 +162,30 @@ public class MainScene : Game
         {
             DrawGame(gameTime);
         }
+        else if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose)
+        {
+            DrawGameOverScreen();
+        }
 
         _spriteBatch.End();
         base.Draw(gameTime);
     }
 
-    protected void Reset()
+    protected void Reset(GameTime gameTime = null)
     {
-        if (Singleton.Instance._score > readHighScore()) saveHighScore();
+        if (Singleton.Instance.Score > readHighScore()) saveHighScore();
         loadHighScore();
-        _launcher = new Launcher(_launcherTexture, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE / 2, (Singleton.GAMEHEIGHT + 1) * Singleton.TILESIZE), this);
+        _launcher = new Launcher(_launcherTexture, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE / 2, (Singleton.GAMEHEIGHT + 1) * Singleton.TILESIZE));
         Singleton.Instance.GameBoard = new Bubble[Singleton.GAMEWIDTH, Singleton.GAMEHEIGHT];
+
+        if (gameTime != null)
+        {
+            Singleton.Instance.GameStartTime = gameTime.TotalGameTime.TotalSeconds;
+            Singleton.Instance.ShotCounter = 0;
+            Singleton.Instance.IsTopRowEven = true;
+            Singleton.Instance.CeilingDropTimer = 0.0;
+            Singleton.Instance.Score = 0;
+        }
 
         // Initialize bubbles in a zigzag pattern with decreasing count per row
         for (int y = 0; y < Singleton.INITIALROWS; y++)
@@ -186,7 +222,7 @@ public class MainScene : Game
             string[] lines = File.ReadAllLines(Singleton.SCOREFILE);
             if (lines.Length > 0)
             {
-                Singleton.Instance._highScore = int.Parse(lines[0]);
+                Singleton.Instance.HighScore = int.Parse(lines[0]);
             }
         }
     }
@@ -199,7 +235,7 @@ public class MainScene : Game
             string[] lines = File.ReadAllLines(Singleton.BESTTIMEFILE);
             if (lines.Length > 0)
             {
-                Singleton.Instance._highScore = int.Parse(lines[0]);
+                Singleton.Instance.HighScore = int.Parse(lines[0]);
             }
         }
     }
@@ -207,7 +243,7 @@ public class MainScene : Game
     protected void saveHighScore()
     {
         // Save score to file
-        File.WriteAllText(Singleton.SCOREFILE, Singleton.Instance._score.ToString());
+        File.WriteAllText(Singleton.SCOREFILE, Singleton.Instance.Score.ToString());
     }
 
     protected int readHighScore()
@@ -226,8 +262,8 @@ public class MainScene : Game
 
     public void IncreaseScore(int score)
     {
-        Singleton.Instance._score += score;
-        Console.WriteLine(Singleton.Instance._score);
+        Singleton.Instance.Score += score;
+        Console.WriteLine(Singleton.Instance.Score);
     }
 
     private void HandleMenuInput(GameTime gameTime)
@@ -307,16 +343,26 @@ public class MainScene : Game
         _spriteBatch.DrawString(_font, "Next: ", new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE), Color.White);
 
         //draw score text
-        _spriteBatch.DrawString(_font, "Score: " + Singleton.Instance._score, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 100), Color.White);
+        _spriteBatch.DrawString(_font, "Score: " + Singleton.Instance.Score, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 100), Color.White);
 
         //draw high score text
-        _spriteBatch.DrawString(_font, "Highscore: " + Singleton.Instance._highScore, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 200), Color.White);
+        _spriteBatch.DrawString(_font, "Highscore: " + Singleton.Instance.HighScore, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 200), Color.White);
 
         //draw time elapsed
         _spriteBatch.DrawString(_font, "Time: " + Math.Round(gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime), new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 300), Color.White);
 
         //draw best time
-        _spriteBatch.DrawString(_font, "Best Time: " + Singleton.Instance._bestTime, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 400), Color.White);
+        _spriteBatch.DrawString(_font, "Best Time: " + Singleton.Instance.BestTime, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 400), Color.White);
     }
+
+    private void DrawGameOverScreen()
+    {
+        string gameOverText = "Game Over!";
+        _spriteBatch.DrawString(_font, gameOverText, new Vector2((_graphics.PreferredBackBufferWidth - _font.MeasureString(gameOverText).X) / 2, 150), Color.Red);
+
+        DrawButton(restartButtonRect, "Restart");
+        DrawButton(menuButtonRect, "Main Menu");
+    }
+
 
 }

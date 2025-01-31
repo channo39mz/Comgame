@@ -10,7 +10,7 @@ class GameObject
 	public float Rotation;
 	public Vector2 Scale;
 
-	public string Name;
+	// public string Name;
 
 	public Rectangle Rectangle
 	{

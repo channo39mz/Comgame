@@ -45,44 +45,43 @@ class MovingBubble : Bubble
                 var otherBubble = Singleton.Instance.GameBoard[x, y];
                 if (otherBubble != null && Vector2.Distance(Position, otherBubble.Position) < Singleton.TILESIZE * 0.9f)
                 {
-                    if (otherBubble.CurrentColor == BubbleColor.BLACKHOLE)
-                    {
-                        HasStopped = true;
+                    StopBubble();
+                }
 
-                        // destroy surrounding bubbles
-                        Singleton.Instance.GameBoard[x, y] = null; // the collided blackhole
-                        if (x - 1 >= 0) Singleton.Instance.GameBoard[x - 1, y] = null; // left
-                        if (x + 1 < Singleton.GAMEWIDTH) Singleton.Instance.GameBoard[x + 1, y] = null; // right
-                        if (y - 1 >= 0) Singleton.Instance.GameBoard[x, y - 1] = null; // top
-                        if (y + 1 < Singleton.GAMEHEIGHT) Singleton.Instance.GameBoard[x, y + 1] = null; // bottom
-                        if (Singleton.IsRowEven(y))
-                        {
-                            if (x - 1 >= 0 && y - 1 >= 0) Singleton.Instance.GameBoard[x - 1, y - 1] = null; // top-left
-                            if (x - 1 >= 0 && y + 1 < Singleton.GAMEHEIGHT) Singleton.Instance.GameBoard[x - 1, y + 1] = null; // bottom-left
-                        }
-                        else
-                        {
-                            if (x + 1 < Singleton.GAMEWIDTH && y - 1 >= 0) Singleton.Instance.GameBoard[x + 1, y - 1] = null; // top-right
-                            if (x + 1 < Singleton.GAMEWIDTH && y + 1 < Singleton.GAMEHEIGHT) Singleton.Instance.GameBoard[x + 1, y + 1] = null; // bottom-right
-                        }
-
-                        DestroyFloatingBubbles(); // ลบ Bubble ที่ลอยอยู่
-
-                        Singleton.Instance.exploded.Play(0.1f, 0.0f, 0.0f);
-                        Singleton.Instance.Score += 100;
-                    }
-                    else
-                    {
-                        StopBubble();
-                    }
-
+                if (HasStopped)
+                {
                     Singleton.printgameboard();
                     return;
                 }
             }
+
         }
 
         base.Update(gameTime);
+    }
+
+    private void ActivateBlackhole(int row, int col)
+    {
+        // destroy surrounding bubbles
+        Singleton.Instance.GameBoard[col, row] = null; // the collided blackhole
+        if (col - 1 >= 0) Singleton.Instance.GameBoard[col - 1, row] = null; // left
+        if (col + 1 < Singleton.GAMEWIDTH) Singleton.Instance.GameBoard[col + 1, row] = null; // right
+        if (row - 1 >= 0) Singleton.Instance.GameBoard[col, row - 1] = null; // top
+        if (row + 1 < Singleton.GAMEHEIGHT) Singleton.Instance.GameBoard[col, row + 1] = null; // bottom
+        if (Singleton.IsRowEven(row))
+        {
+            if (col - 1 >= 0 && row - 1 >= 0) Singleton.Instance.GameBoard[col - 1, row - 1] = null; // top-left
+            if (col - 1 >= 0 && row + 1 < Singleton.GAMEHEIGHT) Singleton.Instance.GameBoard[col - 1, row + 1] = null; // bottom-left
+        }
+        else
+        {
+            if (col + 1 < Singleton.GAMEWIDTH && row - 1 >= 0) Singleton.Instance.GameBoard[col + 1, row - 1] = null; // top-right
+            if (col + 1 < Singleton.GAMEWIDTH && row + 1 < Singleton.GAMEHEIGHT) Singleton.Instance.GameBoard[col + 1, row + 1] = null; // bottom-right
+        }
+        DestroyFloatingBubbles(); // ลบ Bubble ที่ลอยอยู่
+
+        Singleton.Instance.exploded.Play(0.1f, 0.0f, 0.0f);
+        Singleton.Instance.Score += 100;
     }
 
     private void StopBubble()
@@ -109,6 +108,55 @@ class MovingBubble : Bubble
             Singleton.Instance.CurrentGameState = Singleton.GameState.GameLose;
             return;
         }
+
+        // check blackhole collision 6 directions
+        if ((col - 1 >= 0) && Singleton.Instance.GameBoard[col - 1, row] != null && Singleton.Instance.GameBoard[col - 1, row].CurrentColor == BubbleColor.BLACKHOLE)
+        {
+            ActivateBlackhole(row, col - 1);
+            return;
+        }
+        if ((col + 1 < Singleton.GAMEWIDTH) && Singleton.Instance.GameBoard[col + 1, row] != null && Singleton.Instance.GameBoard[col + 1, row].CurrentColor == BubbleColor.BLACKHOLE)
+        {
+            ActivateBlackhole(row, col + 1);
+            return;
+        }
+        if ((row - 1 >= 0) && Singleton.Instance.GameBoard[col, row - 1] != null && Singleton.Instance.GameBoard[col, row - 1].CurrentColor == BubbleColor.BLACKHOLE)
+        {
+            ActivateBlackhole(row - 1, col);
+            return;
+        }
+        if ((row + 1 < Singleton.GAMEHEIGHT) && Singleton.Instance.GameBoard[col, row + 1] != null && Singleton.Instance.GameBoard[col, row + 1].CurrentColor == BubbleColor.BLACKHOLE)
+        {
+            ActivateBlackhole(row + 1, col);
+            return;
+        }
+        if (Singleton.IsRowEven(row))
+        {
+            if ((col - 1 >= 0 && row - 1 >= 0) && Singleton.Instance.GameBoard[col - 1, row - 1] != null && Singleton.Instance.GameBoard[col - 1, row - 1].CurrentColor == BubbleColor.BLACKHOLE)
+            {
+                ActivateBlackhole(row - 1, col - 1);
+                return;
+            }
+            if ((col - 1 >= 0 && row + 1 < Singleton.GAMEHEIGHT) && Singleton.Instance.GameBoard[col - 1, row + 1] != null && Singleton.Instance.GameBoard[col - 1, row + 1].CurrentColor == BubbleColor.BLACKHOLE)
+            {
+                ActivateBlackhole(row + 1, col - 1);
+                return;
+            }
+        }
+        else
+        {
+            if ((col + 1 < Singleton.GAMEWIDTH && row - 1 >= 0) && Singleton.Instance.GameBoard[col + 1, row - 1] != null && Singleton.Instance.GameBoard[col + 1, row - 1].CurrentColor == BubbleColor.BLACKHOLE)
+            {
+                ActivateBlackhole(row - 1, col + 1);
+                return;
+            }
+            if ((col + 1 < Singleton.GAMEWIDTH && row + 1 < Singleton.GAMEHEIGHT) && Singleton.Instance.GameBoard[col + 1, row + 1] != null && Singleton.Instance.GameBoard[col + 1, row + 1].CurrentColor == BubbleColor.BLACKHOLE)
+            {
+                ActivateBlackhole(row + 1, col + 1);
+                return;
+            }
+        }
+
 
         // ปรับตำแหน่งให้อยู่ตรงกลางของช่องในตาราง
         float offsetX = (Singleton.IsRowEven(row)) ? 0 : Singleton.TILESIZE / 2;

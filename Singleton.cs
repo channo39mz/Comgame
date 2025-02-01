@@ -52,6 +52,12 @@ class Singleton
 	public double CeilingDropTimer = 0.0;
 	public static bool IsCeilingDropping = false;
 
+	public int LastComboCount { get; private set; } = 0;
+	public Vector2 LastComboPosition { get; private set; } = Vector2.Zero;
+	public double ComboDisplayTimer { get; private set; } = 0;
+	private const double ComboDisplayDuration = 1.0; // Display for 1 second
+
+
 	public enum GameState
 	{
 		MainMenu,
@@ -132,7 +138,7 @@ class Singleton
 		}
 
 		instance.IsTopRowEven = !instance.IsTopRowEven;
-		
+
 		// Move all bubbles down by 1 row
 		for (int y = GAMEHEIGHT - 1; y > 0; y--)
 		{
@@ -191,5 +197,24 @@ class Singleton
 	{
 		return Instance.Random.Next(100) < percent;
 	}
+
+	public void UpdateCombo(int combo, Vector2 position)
+	{
+		if (combo > 1) // Only show combos of 2 or more
+		{
+			LastComboCount = combo;
+			LastComboPosition = position;
+			ComboDisplayTimer = ComboDisplayDuration;
+		}
+	}
+
+	public void ReduceComboTimer(GameTime gameTime)
+	{
+		if (ComboDisplayTimer > 0)
+		{
+			ComboDisplayTimer -= gameTime.ElapsedGameTime.TotalSeconds;
+		}
+	}
+
 
 }

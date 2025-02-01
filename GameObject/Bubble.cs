@@ -28,7 +28,7 @@ class Bubble : GameObject
 	public Bubble(Vector2 position)
 	{
 		Position = position;
-		CurrentColor = Singleton.RandomByPercent(2) ? BubbleColor.BLACKHOLE : GetRandomColor();
+		CurrentColor = Singleton.RandomByPercent(5) ? BubbleColor.BLACKHOLE : GetRandomColor();
 		_texture = _bubbleTextures[CurrentColor];
 	}
 

@@ -11,6 +11,7 @@ class MovingBubble : Bubble
     public Vector2 Velocity;
     public bool HasStopped { get; private set; }
     private int comboDestroyCount = 0;
+    private Vector2 lastDestroyedPosition = Vector2.Zero;
 
     public MovingBubble(Vector2 position) : base(position)
     {
@@ -50,23 +51,25 @@ class MovingBubble : Bubble
 
                         // destroy surrounding bubbles
                         Singleton.Instance.GameBoard[x, y] = null; // the collided blackhole
-                        Singleton.Instance.GameBoard[x - 1, y] = null; // left
-                        Singleton.Instance.GameBoard[x + 1, y] = null; // right
-                        Singleton.Instance.GameBoard[x, y - 1] = null; // top
-                        Singleton.Instance.GameBoard[x, y + 1] = null; // bottom
+                        if (x - 1 >= 0) Singleton.Instance.GameBoard[x - 1, y] = null; // left
+                        if (x + 1 < Singleton.GAMEWIDTH) Singleton.Instance.GameBoard[x + 1, y] = null; // right
+                        if (y - 1 >= 0) Singleton.Instance.GameBoard[x, y - 1] = null; // top
+                        if (y + 1 < Singleton.GAMEHEIGHT) Singleton.Instance.GameBoard[x, y + 1] = null; // bottom
                         if (Singleton.IsRowEven(y))
                         {
-                            Singleton.Instance.GameBoard[x - 1, y - 1] = null; // top-left
-                            Singleton.Instance.GameBoard[x - 1, y + 1] = null; // bottom-left
+                            if (x - 1 >= 0 && y - 1 >= 0) Singleton.Instance.GameBoard[x - 1, y - 1] = null; // top-left
+                            if (x - 1 >= 0 && y + 1 < Singleton.GAMEHEIGHT) Singleton.Instance.GameBoard[x - 1, y + 1] = null; // bottom-left
                         }
                         else
                         {
-                            Singleton.Instance.GameBoard[x + 1, y - 1] = null; // top-right
-                            Singleton.Instance.GameBoard[x + 1, y + 1] = null; // bottom-right
+                            if (x + 1 < Singleton.GAMEWIDTH && y - 1 >= 0) Singleton.Instance.GameBoard[x + 1, y - 1] = null; // top-right
+                            if (x + 1 < Singleton.GAMEWIDTH && y + 1 < Singleton.GAMEHEIGHT) Singleton.Instance.GameBoard[x + 1, y + 1] = null; // bottom-right
                         }
-                        Singleton.Instance.exploded.Play(0.1f,0.0f,0.0f);
+                        Singleton.Instance.exploded.Play(0.1f, 0.0f, 0.0f);
                         Singleton.Instance.Score += 100;
-                    } else {
+                    }
+                    else
+                    {
                         StopBubble();
                     }
 
@@ -127,10 +130,14 @@ class MovingBubble : Bubble
         {
             FloodFillDestroy(col, row, CurrentColor);
             DestroyFloatingBubbles(); // ลบ Bubble ที่ลอยอยู่
-            
-            
+
+            Singleton.Instance.Score += comboDestroyCount * 10;
+            if (comboDestroyCount > 1)
+            {
+                // Store combo details in Singleton
+                Singleton.Instance.UpdateCombo(comboDestroyCount, lastDestroyedPosition);
+            }
         }
-        Singleton.Instance.Score += comboDestroyCount * 10;
         comboDestroyCount = 0;
         Singleton.rendergameboard();
     }
@@ -138,7 +145,7 @@ class MovingBubble : Bubble
     private void DestroyFloatingBubbles()
     {
         HashSet<(int, int)> connectedToTop = new HashSet<(int, int)>();
-        Singleton.Instance.exploded.Play(0.1f,0.0f,0.0f);
+        Singleton.Instance.exploded.Play(0.1f, 0.0f, 0.0f);
         // 🔹 ตรวจหาว่า Bubble ไหนเชื่อมต่อกับแถวบนสุด
         for (int x = 0; x < Singleton.GAMEWIDTH; x++)
         {
@@ -241,6 +248,7 @@ class MovingBubble : Bubble
             return;
 
         // ลบ Bubble นี้ออกจากบอร์ด
+        lastDestroyedPosition = bubble.Position;
         Singleton.Instance.GameBoard[col, row] = null;
         comboDestroyCount++;
 

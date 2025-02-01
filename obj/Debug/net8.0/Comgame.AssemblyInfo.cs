@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Comgame")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+12d2aca018c0488c213299977bd4f7e52cd1d1a3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2d26d5fe5e04f3da05ab25e5e3d7aa9b3f3afd2c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Comgame")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Comgame")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -159,3 +159,10 @@ C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\be
 C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\highscore.txt
 C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\runtimes\osx\native\libSDL2-2.0.0.dylib
 C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\runtimes\win-x86\native\SDL2.dll
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\fail.ogg
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\fail.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\win.ogg
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\win.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\newroll.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\bgm_main2.ogg
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\bgm_main2.xnb

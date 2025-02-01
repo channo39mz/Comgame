@@ -5,7 +5,11 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/Audio/bgm_main.mp3</File>
+    <File>C:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/Audio/bgm_main2.mp3</File>
     <File>C:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/Audio/exploded.mp3</File>
+    <File>C:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/Audio/fail.mp3</File>
+    <File>C:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/Audio/newroll.mp3</File>
+    <File>C:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/Audio/win.mp3</File>
     <File>C:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/bubble_blue.png</File>
     <File>C:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/bubble_green.png</File>
     <File>C:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/bubble_red.png</File>
@@ -15,6 +19,10 @@
     <File>C:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/launcher.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

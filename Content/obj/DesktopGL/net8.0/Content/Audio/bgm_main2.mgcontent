@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>C:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/Audio/bgm_main2.mp3</SourceFile>
+  <SourceTime>2025-02-01T12:32:43.5711436+07:00</SourceTime>
+  <DestFile>C:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/bin/DesktopGL/Content/Audio/bgm_main2.xnb</DestFile>
+  <DestTime>2025-02-01T13:06:13.5320237+07:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2024-08-17T00:05:56+07:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>C:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/bin/DesktopGL/Content/Audio/bgm_main2.ogg</string>
+  </BuildOutput>
+</PipelineBuildEvent>

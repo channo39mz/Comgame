@@ -25,10 +25,15 @@ public class MainScene : Game
     private double _bgTimer = 0;
     private double _bgInterval = 0.5; // Time interval in seconds (adjust as needed)
     private Song song;
+    private SoundEffect dropRow;
+    private SoundEffect winSound;
+    private SoundEffect loseSound;
     public SoundEffect exploded;
-    private int counterforexploded = 0;
-    private int preCount = 0;
     private float volumn = 0.25f;
+    private bool effPlayTime = false;
+    private bool isBGMStop = false;
+    private Random randoming = new Random();
+    private int randomNum;
 
     private Rectangle playButtonRect;
     private Rectangle exitButtonRect;
@@ -71,10 +76,20 @@ public class MainScene : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        song = Content.Load<Song>("Audio/bgm_main");
+        randomNum = randoming.Next(0,10);
+        if(randomNum%2 == 0){
+            song = Content.Load<Song>("Audio/bgm_main");
+        }else{
+            song = Content.Load<Song>("Audio/bgm_main2");
+        }
+        Console.WriteLine(randomNum%2);
         Singleton.Instance.exploded = Content.Load<SoundEffect>("Audio/exploded");
+        Singleton.Instance.dropRow = Content.Load<SoundEffect>("Audio/newroll");
+        winSound = Content.Load<SoundEffect>("Audio/win");
+        loseSound = Content.Load<SoundEffect>("Audio/fail");
         MediaPlayer.Play(song); //Backgound Music play
         MediaPlayer.Volume = volumn; //Background Music Volumn
+        MediaPlayer.IsRepeating = true;
         _bubbleTextures = new Dictionary<Bubble.BubbleColor, Texture2D>
         {
             { Bubble.BubbleColor.RED, Content.Load<Texture2D>("bubble_red") },
@@ -109,6 +124,29 @@ public class MainScene : Game
         var keyboardState = Keyboard.GetState();
         Singleton.Instance.CurrentKey = keyboardState;
 
+        if(Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon && effPlayTime == false){
+            winSound.Play(0.25f,0.0f,0.0f);
+            MediaPlayer.Stop();
+            Console.WriteLine(effPlayTime);
+            MediaPlayer.IsRepeating = true;
+            isBGMStop = true;
+            effPlayTime = true;
+        }
+        if(Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose && effPlayTime == false){
+            loseSound.Play(0.25f,0.0f,0.0f);
+            MediaPlayer.Stop();
+            Console.WriteLine(effPlayTime);
+            MediaPlayer.IsRepeating = true;
+            isBGMStop = true;
+            effPlayTime = true;
+        }
+        if(isBGMStop == true && !(Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose || Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon)){
+            isBGMStop = false;
+            MediaPlayer.Play(song);
+            MediaPlayer.Volume = volumn;
+        }
+
+
         if (keyboardState.IsKeyDown(Keys.Escape))
         {
             if (Singleton.Instance.Score > readHighScore()) saveHighScore();
@@ -122,6 +160,7 @@ public class MainScene : Game
         else if (Singleton.Instance.CurrentGameState == Singleton.GameState.InGame)
         {
             _launcher.Update(gameTime);
+            effPlayTime = false;
 
             // Bypass
             // if (Singleton.Instance.ShotCounter == 10)
@@ -261,9 +300,6 @@ public class MainScene : Game
             for (int x = 0; x < Singleton.GAMEWIDTH; x++)
             {
                 row += Singleton.Instance.GameBoard[x, y] != null ? "O " : ". ";
-                if(Singleton.Instance.GameBoard[x, y] != null){
-                    counterforexploded++;
-                }
             }
             Console.WriteLine(row);
         }
@@ -434,7 +470,7 @@ public class MainScene : Game
     {
         string gameOverText = "Game Over!";
         _spriteBatch.DrawString(_font, gameOverText, new Vector2((_graphics.PreferredBackBufferWidth - _font.MeasureString(gameOverText).X) / 2, 150), Color.Red);
-
+        
         DrawButton(restartButtonRect, "Restart");
         DrawButton(menuButtonRect, "Main Menu");
     }
@@ -443,7 +479,7 @@ public class MainScene : Game
     {
         string gameWonText = "You Won!";
         _spriteBatch.DrawString(_font, gameWonText, new Vector2((_graphics.PreferredBackBufferWidth - _font.MeasureString(gameWonText).X) / 2, 150), Color.Green);
-
+        
         DrawButton(playAgainButtonRect, "Play Again");
         DrawButton(menuButtonRect, "Main Menu");
     }

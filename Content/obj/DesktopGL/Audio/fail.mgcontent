@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>c:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/Audio/fail.mp3</SourceFile>
+  <SourceTime>2025-01-31T22:54:19.0961263+07:00</SourceTime>
+  <DestFile>c:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/bin/DesktopGL/Audio/fail.xnb</DestFile>
+  <DestTime>2025-02-01T12:10:52.2251476+07:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2024-08-17T00:05:56+07:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

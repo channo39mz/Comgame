@@ -39,6 +39,7 @@ class Singleton
 
 	public KeyboardState PreviousKey, CurrentKey;
 	public SoundEffect exploded;
+	public SoundEffect dropRow;
 
 	public Random Random = new Random();
 
@@ -131,7 +132,7 @@ class Singleton
 		}
 
 		instance.IsTopRowEven = !instance.IsTopRowEven;
-
+		
 		// Move all bubbles down by 1 row
 		for (int y = GAMEHEIGHT - 1; y > 0; y--)
 		{

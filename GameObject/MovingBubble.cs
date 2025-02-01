@@ -127,7 +127,7 @@ class MovingBubble : Bubble
         {
             FloodFillDestroy(col, row, CurrentColor);
             DestroyFloatingBubbles(); // ลบ Bubble ที่ลอยอยู่
-            Singleton.Instance.exploded.Play(0.1f,0.0f,0.0f);
+            
             
         }
         Singleton.Instance.Score += comboDestroyCount * 10;
@@ -138,7 +138,7 @@ class MovingBubble : Bubble
     private void DestroyFloatingBubbles()
     {
         HashSet<(int, int)> connectedToTop = new HashSet<(int, int)>();
-
+        Singleton.Instance.exploded.Play(0.1f,0.0f,0.0f);
         // 🔹 ตรวจหาว่า Bubble ไหนเชื่อมต่อกับแถวบนสุด
         for (int x = 0; x < Singleton.GAMEWIDTH; x++)
         {

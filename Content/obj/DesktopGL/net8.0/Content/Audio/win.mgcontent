@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>c:/Users/modda/OneDrive/Documents/KMITL/ปี 3/Computer Game Programming/MidtermProject/Content/Audio/win.mp3</SourceFile>
+  <SourceTime>2025-02-01T22:50:59.2105041+07:00</SourceTime>
+  <DestFile>c:/Users/modda/OneDrive/Documents/KMITL/ปี 3/Computer Game Programming/MidtermProject/Content/bin/DesktopGL/Content/Audio/win.xnb</DestFile>
+  <DestTime>2025-02-01T22:52:50.2602546+07:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2024-08-17T00:05:56+07:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

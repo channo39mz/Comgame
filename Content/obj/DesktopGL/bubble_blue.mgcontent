@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<<<<<<< HEAD
-  <SourceFile>c:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/bubble_blue.png</SourceFile>
-  <SourceTime>2025-01-31T14:44:48.5580469+07:00</SourceTime>
-  <DestFile>c:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/bin/DesktopGL/bubble_blue.xnb</DestFile>
-  <DestTime>2025-01-31T21:52:44.9570977+07:00</DestTime>
-=======
   <SourceFile>c:/Users/modda/OneDrive/Documents/KMITL/ปี 3/Computer Game Programming/MidtermProject/Content/bubble_blue.png</SourceFile>
   <SourceTime>2025-01-30T23:01:34.9111029+07:00</SourceTime>
   <DestFile>c:/Users/modda/OneDrive/Documents/KMITL/ปี 3/Computer Game Programming/MidtermProject/Content/bin/DesktopGL/bubble_blue.xnb</DestFile>
-  <DestTime>2025-01-31T21:32:03.1218157+07:00</DestTime>
->>>>>>> 2ea0f58a2eea2ea7c38a97a93fb0d67caf7628ac
+  <DestTime>2025-02-01T22:53:33.0771226+07:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

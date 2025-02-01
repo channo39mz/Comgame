@@ -19,11 +19,38 @@
 /processorParam:Quality=Best
 /build:Audio/bgm_main.mp3
 
+#begin Audio/bgm_main2.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Audio/bgm_main2.mp3
+
 #begin Audio/exploded.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Audio/exploded.mp3
+
+#begin Audio/fail.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/fail.mp3
+
+#begin Audio/newroll.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/newroll.mp3
+
+#begin Audio/win.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/win.mp3
+
+#begin besttime.txt
+/copy:besttime.txt
 
 #begin bubble_blue.png
 /importer:TextureImporter
@@ -92,6 +119,9 @@
 /processorParam:TextureFormat=Compressed
 /build:GameFont.spritefont
 
+#begin highscore.txt
+/copy:highscore.txt
+
 #begin launcher.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -104,8 +134,3 @@
 /processorParam:TextureFormat=Color
 /build:launcher.png
 
-#begin highscore.txt
-/copy:highscore.txt
-
-#begin besttime.txt
-/copy:besttime.txt

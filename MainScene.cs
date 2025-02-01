@@ -75,12 +75,14 @@ public class MainScene : Game
         Singleton.Instance.exploded = Content.Load<SoundEffect>("Audio/exploded");
         MediaPlayer.Play(song); //Backgound Music play
         MediaPlayer.Volume = volumn; //Background Music Volumn
+
         _bubbleTextures = new Dictionary<Bubble.BubbleColor, Texture2D>
         {
             { Bubble.BubbleColor.RED, Content.Load<Texture2D>("bubble_red") },
             { Bubble.BubbleColor.BLUE, Content.Load<Texture2D>("bubble_blue") },
             { Bubble.BubbleColor.GREEN, Content.Load<Texture2D>("bubble_green") },
-            { Bubble.BubbleColor.YELLOW, Content.Load<Texture2D>("bubble_yellow") }
+            { Bubble.BubbleColor.YELLOW, Content.Load<Texture2D>("bubble_yellow") },
+            { Bubble.BubbleColor.BLACKHOLE, Content.Load<Texture2D>("blackhole") }
         };
         Bubble.LoadTextures(_bubbleTextures);
 
@@ -169,10 +171,9 @@ public class MainScene : Game
         }
         else if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon)
         {
-
             if (Singleton.Instance.Score > readHighScore())
                 saveHighScore();
-            if ((gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime) > readBestTime())
+            if ((gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime) < readBestTime())
                 saveBestTime(gameTime);
 
             MouseState mouseState = Mouse.GetState();
@@ -350,6 +351,7 @@ public class MainScene : Game
             if (playButtonRect.Contains(mousePoint))
             {
                 Singleton.Instance.GameStartTime = gameTime.TotalGameTime.TotalSeconds;
+                Reset(gameTime);
                 Singleton.Instance.CurrentGameState = Singleton.GameState.InGame;
 
             }

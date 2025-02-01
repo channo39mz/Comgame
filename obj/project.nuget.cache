@@ -1,18 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "0oe+HEt61YI=",
+  "dgSpecHash": "LBKlW/H9Bhs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\User\\Documents\\Java\\ComGame\\Comgame\\Comgame\\Comgame.csproj",
+  "projectFilePath": "c:\\Users\\modda\\OneDrive\\Documents\\KMITL\\ปี 3\\Computer Game Programming\\MidtermProject\\Comgame.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\User\\.nuget\\packages\\monogame.content.builder.task\\3.8.2.1105\\monogame.content.builder.task.3.8.2.1105.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
+    "C:\\Users\\modda\\.nuget\\packages\\monogame.content.builder.task\\3.8.2.1105\\monogame.content.builder.task.3.8.2.1105.nupkg.sha512",
+    "C:\\Users\\modda\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\User\\Documents\\Java\\ComGame\\Comgame\\Comgame\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }

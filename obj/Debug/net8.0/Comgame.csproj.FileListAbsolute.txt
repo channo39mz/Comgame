@@ -4,7 +4,6 @@ c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\Midte
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bg_3.xnb
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bg_4.xnb
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bg_5.xnb
-c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bubble.xnb
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bubble_blue.xnb
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bubble_green.xnb
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bubble_red.xnb
@@ -159,3 +158,8 @@ C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\be
 C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\highscore.txt
 C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\runtimes\osx\native\libSDL2-2.0.0.dylib
 C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\runtimes\win-x86\native\SDL2.dll
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\exploded.ogg
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\bgm_main.ogg
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\bgm_main.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\exploded.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\blackhole.xnb

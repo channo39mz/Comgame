@@ -73,7 +73,7 @@
 /processorParam:TextureFormat=Color
 /build:bubble_yellow.png
 
-#begin bubble.png
+#begin blackhole.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -83,7 +83,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:bubble.png
+/build:blackhole.png
 
 #begin GameFont.spritefont
 /importer:FontDescriptionImporter

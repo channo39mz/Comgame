@@ -12,10 +12,11 @@ class Bubble : GameObject
 		RED,
 		YELLOW,
 		BLUE,
-		GREEN
+		GREEN,
+		BLACKHOLE // always put blackhole at the end
 	}
-	public BubbleColor CurrentColor { get; private set; }
-	private static Dictionary<BubbleColor, Texture2D> _bubbleTextures;
+	public BubbleColor CurrentColor { get; protected set; }
+	protected static Dictionary<BubbleColor, Texture2D> _bubbleTextures;
 
 	public Bubble(Vector2 position , BubbleColor color)
 	{
@@ -27,7 +28,7 @@ class Bubble : GameObject
 	public Bubble(Vector2 position)
 	{
 		Position = position;
-		CurrentColor = GetRandomColor();
+		CurrentColor = Singleton.RandomByPercent(2) ? BubbleColor.BLACKHOLE : GetRandomColor();
 		_texture = _bubbleTextures[CurrentColor];
 	}
 
@@ -36,9 +37,9 @@ class Bubble : GameObject
 		_bubbleTextures = textures;
 	}
 
-	private static BubbleColor GetRandomColor()
+	protected static BubbleColor GetRandomColor()
 	{
-		return (BubbleColor)Singleton.Instance.Random.Next(Enum.GetValues(typeof(BubbleColor)).Length);
+		return (BubbleColor)Singleton.Instance.Random.Next(Enum.GetValues(typeof(BubbleColor)).Length - 1); // exclude blackhole
 	}
 
 	public override void Draw(SpriteBatch spriteBatch)

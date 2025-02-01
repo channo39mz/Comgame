@@ -23,7 +23,7 @@ class Singleton
 	public const int SCREENWIDTH = GAMEWIDTH + SCOREWIDTH;
 	public const int SCREENHEIGHT = GAMEHEIGHT + LAUNCHERHEIGHT;
 
-	public const int INITIALROWS = 3;
+	public const int INITIALROWS = 4;
 	public const double DROP_INTERVAL = 5.0;
 
 	public int Score = 0;
@@ -42,7 +42,7 @@ class Singleton
 
 	public Random Random = new Random();
 
-	public const int SHOTS_BEFORE_DROP = 50;
+	public const int SHOTS_BEFORE_DROP = 5;
 	public int ShotCounter = 0;
 
 	public bool IsTopRowEven = true;
@@ -119,6 +119,17 @@ class Singleton
 	{
 		Console.WriteLine("Ceiling Dropped!");
 
+		bool willLose = false;
+		// Check lose state
+		for (int x = 0; x < GAMEWIDTH; x++)
+		{
+			if (instance.GameBoard[x, GAMEHEIGHT - 1] != null)
+			{
+				willLose = true;
+				break;
+			}
+		}
+
 		instance.IsTopRowEven = !instance.IsTopRowEven;
 
 		// Move all bubbles down by 1 row
@@ -135,10 +146,6 @@ class Singleton
 			instance.GameBoard[x, 0] = null;
 		}
 
-		// Console.WriteLine("======= After Move Down =======");
-		// printgameboard();
-		// Console.WriteLine("======= After Move Down =======");
-
 		// Generate the top row
 		int bubbleCount = instance.IsTopRowEven ? GAMEWIDTH : GAMEWIDTH - 1;
 		for (int x = 0; x < bubbleCount; x++)
@@ -146,15 +153,16 @@ class Singleton
 			instance.GameBoard[x, 0] = new Bubble(new Vector2(0f, 0f));
 		}
 
-		// Console.WriteLine("======= After Generated New Row =======");
-		// printgameboard();
-		// Console.WriteLine("======= After Generated New Row =======");
-
 		// Reset the shot counter
 		instance.ShotCounter = 0;
 
 		// Re-render the game board after shifting
 		rendergameboard();
+
+		if (willLose)
+		{
+			instance.CurrentGameState = GameState.GameLose;
+		}
 	}
 
 	public static bool IsRowEven(int rowIndex)
@@ -176,6 +184,11 @@ class Singleton
 		}
 
 		return true;
+	}
+
+	public static bool RandomByPercent(int percent)
+	{
+		return Instance.Random.Next(100) < percent;
 	}
 
 }

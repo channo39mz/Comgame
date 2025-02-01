@@ -15,6 +15,8 @@ class MovingBubble : Bubble
     public MovingBubble(Vector2 position) : base(position)
     {
         HasStopped = false;
+        CurrentColor = GetRandomColor();
+        _texture = _bubbleTextures[CurrentColor];
     }
     public override void Update(GameTime gameTime)
     {
@@ -42,7 +44,32 @@ class MovingBubble : Bubble
                 var otherBubble = Singleton.Instance.GameBoard[x, y];
                 if (otherBubble != null && Vector2.Distance(Position, otherBubble.Position) < Singleton.TILESIZE * 0.9f)
                 {
-                    StopBubble();
+                    if (otherBubble.CurrentColor == BubbleColor.BLACKHOLE)
+                    {
+                        HasStopped = true;
+
+                        // destroy surrounding bubbles
+                        Singleton.Instance.GameBoard[x, y] = null; // the collided blackhole
+                        Singleton.Instance.GameBoard[x - 1, y] = null; // left
+                        Singleton.Instance.GameBoard[x + 1, y] = null; // right
+                        Singleton.Instance.GameBoard[x, y - 1] = null; // top
+                        Singleton.Instance.GameBoard[x, y + 1] = null; // bottom
+                        if (Singleton.IsRowEven(y))
+                        {
+                            Singleton.Instance.GameBoard[x - 1, y - 1] = null; // top-left
+                            Singleton.Instance.GameBoard[x - 1, y + 1] = null; // bottom-left
+                        }
+                        else
+                        {
+                            Singleton.Instance.GameBoard[x + 1, y - 1] = null; // top-right
+                            Singleton.Instance.GameBoard[x + 1, y + 1] = null; // bottom-right
+                        }
+                        Singleton.Instance.exploded.Play(0.1f,0.0f,0.0f);
+                        Singleton.Instance.Score += 100;
+                    } else {
+                        StopBubble();
+                    }
+
                     Singleton.printgameboard();
                     return;
                 }
@@ -78,7 +105,7 @@ class MovingBubble : Bubble
         }
 
         // ปรับตำแหน่งให้อยู่ตรงกลางของช่องในตาราง
-        float offsetX = (row % 2 == 0) ? 0 : Singleton.TILESIZE / 2;
+        float offsetX = (Singleton.IsRowEven(row)) ? 0 : Singleton.TILESIZE / 2;
         Position = new Vector2(col * Singleton.TILESIZE + offsetX, row * Singleton.TILESIZE * 0.866f);
 
         // ตรวจสอบว่าแถวปัจจุบันเต็มหรือไม่
@@ -99,7 +126,6 @@ class MovingBubble : Bubble
         if (CheckAndDestroyBubbles(col, row, CurrentColor) >= 3)
         {
             FloodFillDestroy(col, row, CurrentColor);
-
             DestroyFloatingBubbles(); // ลบ Bubble ที่ลอยอยู่
             Singleton.Instance.exploded.Play(0.1f,0.0f,0.0f);
             
@@ -154,7 +180,7 @@ class MovingBubble : Bubble
         MarkConnectedBubbles(col + 1, row, visited);
         MarkConnectedBubbles(col, row - 1, visited);
         MarkConnectedBubbles(col, row + 1, visited);
-        if (row % 2 == 0)
+        if (Singleton.IsRowEven(row))
         {
             MarkConnectedBubbles(col - 1, row - 1, visited);
             MarkConnectedBubbles(col - 1, row + 1, visited);
@@ -189,7 +215,7 @@ class MovingBubble : Bubble
         count += CheckAndDestroyBubbles(col + 1, row, targetColor, visited);
         count += CheckAndDestroyBubbles(col, row - 1, targetColor, visited);
         count += CheckAndDestroyBubbles(col, row + 1, targetColor, visited);
-        if (row % 2 == 0)
+        if (Singleton.IsRowEven(row))
         {
             count += CheckAndDestroyBubbles(col - 1, row - 1, targetColor, visited);
             count += CheckAndDestroyBubbles(col - 1, row + 1, targetColor, visited);
@@ -223,7 +249,7 @@ class MovingBubble : Bubble
         FloodFillDestroy(col + 1, row, targetColor); // ขวา
         FloodFillDestroy(col, row - 1, targetColor); // บน
         FloodFillDestroy(col, row + 1, targetColor); // ล่าง
-        if (row % 2 == 0)
+        if (Singleton.IsRowEven(row))
         {
             FloodFillDestroy(col - 1, row - 1, targetColor); // ซ้ายบน
             FloodFillDestroy(col - 1, row + 1, targetColor); // ซ้ายล่าง

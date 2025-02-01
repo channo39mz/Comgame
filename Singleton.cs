@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Comgame.GameObject;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Comgame;
 
@@ -50,6 +51,7 @@ class Singleton
 	public const double CEILING_DROP_INTERVAL = 5.0; // Drop every 10 seconds (adjust as needed)
 	public double CeilingDropTimer = 0.0;
 	public static bool IsCeilingDropping = false;
+	public static event Action<Vector2> OnBubbleDestroyed;
 
 	public enum GameState
 	{
@@ -176,6 +178,11 @@ class Singleton
 		}
 
 		return true;
+	}
+
+	public static void TriggerBubbleDestroyed(Vector2 position)
+	{
+		OnBubbleDestroyed?.Invoke(position);
 	}
 
 }

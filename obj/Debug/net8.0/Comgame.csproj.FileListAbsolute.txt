@@ -90,13 +90,11 @@ c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Co
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Comgame.dll
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Comgame.pdb
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\MonoGame.Framework.dll
-c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\NVorbis.dll
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\runtimes\linux-x64\native\libopenal.so.1
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\runtimes\osx\native\libopenal.1.dylib
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\runtimes\win-x64\native\soft_oal.dll
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\runtimes\win-x86\native\soft_oal.dll
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\runtimes\linux-x64\native\libSDL2-2.0.so.0
-c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\runtimes\osx\native\libSDL2.dylib
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\runtimes\win-x64\native\SDL2.dll
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\obj\Debug\net8.0\Comgame.csproj.AssemblyReference.cache
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\obj\Debug\net8.0\Comgame.GeneratedMSBuildEditorConfig.editorconfig
@@ -159,3 +157,12 @@ C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\be
 C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\highscore.txt
 C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\runtimes\osx\native\libSDL2-2.0.0.dylib
 C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\runtimes\win-x86\native\SDL2.dll
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\Audio\exploded.ogg
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\besttime.txt
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\highscore.txt
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\Audio\bgm_main.ogg
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\Audio\bgm_main.xnb
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\Audio\exploded.xnb
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\runtimes\osx\native\libSDL2-2.0.0.dylib
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\runtimes\win-x86\native\SDL2.dll
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\bk_explo_one.xnb

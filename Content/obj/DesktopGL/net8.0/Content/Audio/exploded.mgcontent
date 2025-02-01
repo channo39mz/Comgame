@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/Audio/exploded.mp3</SourceFile>
-  <SourceTime>2025-01-31T21:24:15.4039574+07:00</SourceTime>
-  <DestFile>C:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/bin/DesktopGL/Content/Audio/exploded.xnb</DestFile>
-  <DestTime>2025-01-31T21:52:53.5310482+07:00</DestTime>
+  <SourceFile>c:/Users/ADMIN/Desktop/CS classes/ThirdYear/Term2/ComGame/Bubble Game (Alpha)/Comgame/Content/Audio/exploded.mp3</SourceFile>
+  <SourceTime>2025-02-01T01:06:09.0461487+07:00</SourceTime>
+  <DestFile>c:/Users/ADMIN/Desktop/CS classes/ThirdYear/Term2/ComGame/Bubble Game (Alpha)/Comgame/Content/bin/DesktopGL/Content/Audio/exploded.xnb</DestFile>
+  <DestTime>2025-02-01T01:06:35.8949518+07:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

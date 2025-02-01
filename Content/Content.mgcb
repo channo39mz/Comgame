@@ -25,6 +25,21 @@
 /processorParam:Quality=Best
 /build:Audio/exploded.mp3
 
+#begin besttime.txt
+/copy:besttime.txt
+
+#begin bk_explo_one.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:bk_explo_one.png
+
 #begin bubble_blue.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -92,6 +107,9 @@
 /processorParam:TextureFormat=Compressed
 /build:GameFont.spritefont
 
+#begin highscore.txt
+/copy:highscore.txt
+
 #begin launcher.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -104,8 +122,3 @@
 /processorParam:TextureFormat=Color
 /build:launcher.png
 
-#begin highscore.txt
-/copy:highscore.txt
-
-#begin besttime.txt
-/copy:besttime.txt

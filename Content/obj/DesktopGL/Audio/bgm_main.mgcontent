@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>c:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/Audio/bgm_main.mp3</SourceFile>
-  <SourceTime>2025-01-31T14:48:11.9476024+07:00</SourceTime>
-  <DestFile>c:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/bin/DesktopGL/Audio/bgm_main.xnb</DestFile>
-  <DestTime>2025-01-31T21:52:44.7997452+07:00</DestTime>
+  <SourceFile>c:/Users/ADMIN/Desktop/CS classes/ThirdYear/Term2/ComGame/Bubble Game (Alpha)/Comgame/Content/Audio/bgm_main.mp3</SourceFile>
+  <SourceTime>2025-02-01T01:06:09.0441564+07:00</SourceTime>
+  <DestFile>c:/Users/ADMIN/Desktop/CS classes/ThirdYear/Term2/ComGame/Bubble Game (Alpha)/Comgame/Content/bin/DesktopGL/Audio/bgm_main.xnb</DestFile>
+  <DestTime>2025-02-01T23:44:59.2304541+07:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
   <Processor>SongProcessor</Processor>
@@ -15,6 +15,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>c:/Users/User/Documents/Java/ComGame/Comgame/Comgame/Content/bin/DesktopGL/Audio/bgm_main.ogg</string>
+    <string>c:/Users/ADMIN/Desktop/CS classes/ThirdYear/Term2/ComGame/Bubble Game (Alpha)/Comgame/Content/bin/DesktopGL/Audio/bgm_main.ogg</string>
   </BuildOutput>
 </PipelineBuildEvent>

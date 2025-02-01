@@ -101,8 +101,8 @@ class MovingBubble : Bubble
             FloodFillDestroy(col, row, CurrentColor);
 
             DestroyFloatingBubbles(); // ลบ Bubble ที่ลอยอยู่
-            Singleton.Instance.exploded.Play(0.1f,0.0f,0.0f);
-            
+            Singleton.Instance.exploded.Play(0.1f, 0.0f, 0.0f);
+
         }
         Singleton.Instance.Score += comboDestroyCount * 10;
         comboDestroyCount = 0;
@@ -215,8 +215,17 @@ class MovingBubble : Bubble
             return;
 
         // ลบ Bubble นี้ออกจากบอร์ด
+        // ก่อนลบ Bubble ให้เรียก Trigger Event
+        Vector2 bubbleCenter = new Vector2(
+        bubble.Position.X + Singleton.TILESIZE / 2,
+        bubble.Position.Y + Singleton.TILESIZE / 2
+    );
         Singleton.Instance.GameBoard[col, row] = null;
         comboDestroyCount++;
+
+        // วาด VFX ระเบิด
+        Singleton.TriggerBubbleDestroyed(bubbleCenter);
+
 
         // ค้นหาทาง 6 ทิศทางใน Hex Grid
         FloodFillDestroy(col - 1, row, targetColor); // ซ้าย

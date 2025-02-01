@@ -35,8 +35,8 @@ public class MainScene : Game
     private Rectangle playAgainButtonRect;
     private Rectangle restartButtonRect;
     private Rectangle menuButtonRect;
-
-
+    private Texture2D _explosionTexture;
+    private List<Explosion> _activeExplosions = new List<Explosion>();
 
     public MainScene()
     {
@@ -95,6 +95,8 @@ public class MainScene : Game
         ];
 
         _launcherTexture = Content.Load<Texture2D>("launcher");
+
+        _explosionTexture = Content.Load<Texture2D>("bk_explo_one");
 
         _rectTexture = new Texture2D(_graphics.GraphicsDevice, 1, 1);
         _rectTexture.SetData(new[] { Color.White });
@@ -193,6 +195,30 @@ public class MainScene : Game
 
         Singleton.Instance.PreviousKey = Singleton.Instance.CurrentKey;
 
+        // เพิ่มในส่วน Update
+        for (int i = _activeExplosions.Count - 1; i >= 0; i--)
+        {
+            _activeExplosions[i].Update(gameTime);
+            if (_activeExplosions[i].IsFinished)
+            {
+                _activeExplosions.RemoveAt(i);
+            }
+        }
+
+        // ลงทะเบียน Event ใน Initialize หรือ LoadContent
+        Singleton.OnBubbleDestroyed += pos =>
+        {
+            _activeExplosions.Add(new Explosion(
+                _explosionTexture,
+                pos,
+                64,    // ความกว้างของแต่ละเฟรม
+                64,    // ความสูงของแต่ละเฟรม
+                36,     // จำนวนคอลัมน์ในสไปรท์ชีต
+                1,     // จำนวนแถวในสไปรท์ชีต
+                -0.01f  // เวลาแสดงแต่ละเฟรม (วินาที)
+            ));
+        };
+
         base.Update(gameTime);
     }
 
@@ -218,6 +244,11 @@ public class MainScene : Game
             DrawGameWonScreen();
         }
 
+        // เพิ่มในส่วน Draw หลังจากวาด Bubble
+        foreach (var explosion in _activeExplosions)
+        {
+            explosion.Draw(_spriteBatch);
+        }
 
         _spriteBatch.End();
         base.Draw(gameTime);
@@ -261,7 +292,8 @@ public class MainScene : Game
             for (int x = 0; x < Singleton.GAMEWIDTH; x++)
             {
                 row += Singleton.Instance.GameBoard[x, y] != null ? "O " : ". ";
-                if(Singleton.Instance.GameBoard[x, y] != null){
+                if (Singleton.Instance.GameBoard[x, y] != null)
+                {
                     counterforexploded++;
                 }
             }

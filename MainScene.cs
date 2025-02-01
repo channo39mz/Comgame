@@ -157,7 +157,6 @@ public class MainScene : Game
 
         if (keyboardState.IsKeyDown(Keys.Escape))
         {
-            if (Singleton.Instance.Score > readHighScore()) saveHighScore();
             Exit();
         }
 
@@ -216,9 +215,9 @@ public class MainScene : Game
         }
         else if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon)
         {
-            if (Singleton.Instance.Score > readHighScore())
+            if (Singleton.Instance.Score > Singleton.Instance.HighScore)
                 saveHighScore();
-            if ((gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime) < readBestTime())
+            if ((gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime) < Singleton.Instance.BestTime)
                 saveBestTime(gameTime);
 
             MouseState mouseState = Mouse.GetState();
@@ -362,7 +361,15 @@ public class MainScene : Game
             string[] lines = File.ReadAllLines(Singleton.BESTTIMEFILE);
             if (lines.Length > 0)
             {
-                Singleton.Instance.BestTime = double.Parse(lines[0]);
+                string bestTimeStr = lines[0];
+                if (bestTimeStr == "Inf")
+                {
+                    Singleton.Instance.BestTime = double.PositiveInfinity;
+                }
+                else
+                {
+                    Singleton.Instance.BestTime = double.Parse(bestTimeStr);
+                }
             }
         }
     }
@@ -373,38 +380,10 @@ public class MainScene : Game
         File.WriteAllText(Singleton.SCOREFILE, Singleton.Instance.Score.ToString());
     }
 
-    protected int readHighScore()
-    {
-        // Read score from file
-        if (File.Exists(Singleton.SCOREFILE))
-        {
-            string[] lines = File.ReadAllLines(Singleton.SCOREFILE);
-            if (lines.Length > 0)
-            {
-                return int.Parse(lines[0]);
-            }
-        }
-        return 0;
-    }
-
     protected void saveBestTime(GameTime gameTime)
     {
         // Save score to file
         File.WriteAllText(Singleton.BESTTIMEFILE, (gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime).ToString());
-    }
-
-    protected double readBestTime()
-    {
-        // Read score from file
-        if (File.Exists(Singleton.BESTTIMEFILE))
-        {
-            string[] lines = File.ReadAllLines(Singleton.BESTTIMEFILE);
-            if (lines.Length > 0)
-            {
-                return double.Parse(lines[0]);
-            }
-        }
-        return 0;
     }
 
     public void IncreaseScore(int score)
@@ -495,7 +474,6 @@ public class MainScene : Game
             _spriteBatch.DrawString(_font, comboText, drawPosition, Color.White);
         }
 
-
         // Draw launcher threshold
         _spriteBatch.Draw(_rectTexture, new Vector2(0f, Singleton.GAMEHEIGHT * Singleton.TILESIZE), null, Color.White, 0f, Vector2.Zero,
             new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE, 1f), SpriteEffects.None, 0f);
@@ -516,7 +494,8 @@ public class MainScene : Game
         _spriteBatch.DrawString(_font, "Time: " + Math.Round(gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime), new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 8, Singleton.TILESIZE + 250), Color.White);
 
         //draw best time
-        _spriteBatch.DrawString(_font, "Best Time: " + Math.Round(Singleton.Instance.BestTime), new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 8, Singleton.TILESIZE + 300), Color.White);
+        string bestTimeText = Singleton.Instance.BestTime == double.PositiveInfinity ? "Best Time: N/A" : "Best Time: " + Math.Round(Singleton.Instance.BestTime);
+        _spriteBatch.DrawString(_font, bestTimeText, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 8, Singleton.TILESIZE + 300), Color.White);
     }
 
     private void DrawGameOverScreen()

@@ -196,3 +196,5 @@ c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Co
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\Audio\win.xnb
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\blackhole.xnb
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\retro_gaming.ttf
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bk_explo_one.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bubble.xnb

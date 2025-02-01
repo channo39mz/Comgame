@@ -109,25 +109,33 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ADMIN\\.nuget\\packages\\": {}
+    "C:\\Users\\modda\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\ADMIN\\Desktop\\CS classes\\ThirdYear\\Term2\\ComGame\\Bubble Game (Alpha)\\Comgame\\Comgame.csproj",
+      "projectUniqueName": "c:\\Users\\modda\\OneDrive\\Documents\\KMITL\\ปี 3\\Computer Game Programming\\MidtermProject\\Comgame.csproj",
       "projectName": "Comgame",
-      "projectPath": "c:\\Users\\ADMIN\\Desktop\\CS classes\\ThirdYear\\Term2\\ComGame\\Bubble Game (Alpha)\\Comgame\\Comgame.csproj",
-      "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\ADMIN\\Desktop\\CS classes\\ThirdYear\\Term2\\ComGame\\Bubble Game (Alpha)\\Comgame\\obj\\",
+      "projectPath": "c:\\Users\\modda\\OneDrive\\Documents\\KMITL\\ปี 3\\Computer Game Programming\\MidtermProject\\Comgame.csproj",
+      "packagesPath": "C:\\Users\\modda\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\modda\\OneDrive\\Documents\\KMITL\\ปี 3\\Computer Game Programming\\MidtermProject\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\modda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.bepinex.dev/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
@@ -171,24 +179,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[8.0.11, 8.0.11]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[8.0.11, 8.0.11]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[8.0.11, 8.0.11]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[8.0.11, 8.0.11]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
@@ -197,13 +187,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file c:\\Users\\ADMIN\\Desktop\\CS classes\\ThirdYear\\Term2\\ComGame\\Bubble Game (Alpha)\\Comgame\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

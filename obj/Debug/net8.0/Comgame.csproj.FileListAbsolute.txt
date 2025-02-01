@@ -4,7 +4,6 @@ c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\Midte
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bg_3.xnb
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bg_4.xnb
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bg_5.xnb
-c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bubble.xnb
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bubble_blue.xnb
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bubble_green.xnb
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\bubble_red.xnb
@@ -166,3 +165,34 @@ c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Co
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\runtimes\osx\native\libSDL2-2.0.0.dylib
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\runtimes\win-x86\native\SDL2.dll
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\bk_explo_one.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\exploded.ogg
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\bgm_main.ogg
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\bgm_main.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\exploded.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\blackhole.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\fail.ogg
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\fail.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\win.ogg
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\win.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\newroll.xnb
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\bgm_main2.ogg
+C:\Users\User\Documents\Java\ComGame\Comgame\Comgame\bin\Debug\net8.0\Content\Audio\bgm_main2.xnb
+>>>>>>> 973c49a5f885e2806e82c1e72f485281fbf9f351
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\fail.ogg
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\win.ogg
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\bgm_main2.ogg
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\bgm_main2.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\fail.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\newroll.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\win.xnb
+c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\retro_gaming.ttf
+>>>>>>> 7dab696d4b31b21dede424d487ff19808a72b209
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\Audio\bgm_main2.ogg
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\Audio\bgm_main2.xnb
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\Audio\fail.ogg
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\Audio\fail.xnb
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\Audio\newroll.xnb
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\Audio\win.ogg
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\Audio\win.xnb
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\blackhole.xnb
+c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\retro_gaming.ttf

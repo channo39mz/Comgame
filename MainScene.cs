@@ -25,10 +25,15 @@ public class MainScene : Game
     private double _bgTimer = 0;
     private double _bgInterval = 0.5; // Time interval in seconds (adjust as needed)
     private Song song;
+    private SoundEffect dropRow;
+    private SoundEffect winSound;
+    private SoundEffect loseSound;
     public SoundEffect exploded;
-    private int counterforexploded = 0;
-    private int preCount = 0;
     private float volumn = 0.25f;
+    private bool effPlayTime = false;
+    private bool isBGMStop = false;
+    private Random randoming = new Random();
+    private int randomNum;
 
     private Rectangle playButtonRect;
     private Rectangle exitButtonRect;
@@ -71,8 +76,20 @@ public class MainScene : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        song = Content.Load<Song>("Audio/bgm_main");
+        randomNum = randoming.Next(0, 10);
+        if (randomNum % 2 == 0)
+        {
+            song = Content.Load<Song>("Audio/bgm_main");
+        }
+        else
+        {
+            song = Content.Load<Song>("Audio/bgm_main2");
+        }
+        Console.WriteLine(randomNum % 2);
         Singleton.Instance.exploded = Content.Load<SoundEffect>("Audio/exploded");
+        Singleton.Instance.dropRow = Content.Load<SoundEffect>("Audio/newroll");
+        winSound = Content.Load<SoundEffect>("Audio/win");
+        loseSound = Content.Load<SoundEffect>("Audio/fail");
         MediaPlayer.Play(song); //Backgound Music play
         MediaPlayer.Volume = volumn; //Background Music Volumn
         _bubbleTextures = new Dictionary<Bubble.BubbleColor, Texture2D>
@@ -80,7 +97,8 @@ public class MainScene : Game
             { Bubble.BubbleColor.RED, Content.Load<Texture2D>("bubble_red") },
             { Bubble.BubbleColor.BLUE, Content.Load<Texture2D>("bubble_blue") },
             { Bubble.BubbleColor.GREEN, Content.Load<Texture2D>("bubble_green") },
-            { Bubble.BubbleColor.YELLOW, Content.Load<Texture2D>("bubble_yellow") }
+            { Bubble.BubbleColor.YELLOW, Content.Load<Texture2D>("bubble_yellow") },
+            { Bubble.BubbleColor.BLACKHOLE, Content.Load<Texture2D>("blackhole") }
         };
         Bubble.LoadTextures(_bubbleTextures);
 
@@ -111,6 +129,32 @@ public class MainScene : Game
         var keyboardState = Keyboard.GetState();
         Singleton.Instance.CurrentKey = keyboardState;
 
+        if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon && effPlayTime == false)
+        {
+            winSound.Play(0.25f, 0.0f, 0.0f);
+            MediaPlayer.Stop();
+            Console.WriteLine(effPlayTime);
+            MediaPlayer.IsRepeating = true;
+            isBGMStop = true;
+            effPlayTime = true;
+        }
+        if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose && effPlayTime == false)
+        {
+            loseSound.Play(0.25f, 0.0f, 0.0f);
+            MediaPlayer.Stop();
+            Console.WriteLine(effPlayTime);
+            MediaPlayer.IsRepeating = true;
+            isBGMStop = true;
+            effPlayTime = true;
+        }
+        if (isBGMStop == true && !(Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose || Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon))
+        {
+            isBGMStop = false;
+            MediaPlayer.Play(song);
+            MediaPlayer.Volume = volumn;
+        }
+
+
         if (keyboardState.IsKeyDown(Keys.Escape))
         {
             if (Singleton.Instance.Score > readHighScore()) saveHighScore();
@@ -124,6 +168,7 @@ public class MainScene : Game
         else if (Singleton.Instance.CurrentGameState == Singleton.GameState.InGame)
         {
             _launcher.Update(gameTime);
+            effPlayTime = false;
 
             // Bypass
             // if (Singleton.Instance.ShotCounter == 10)
@@ -171,10 +216,9 @@ public class MainScene : Game
         }
         else if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon)
         {
-
             if (Singleton.Instance.Score > readHighScore())
                 saveHighScore();
-            if ((gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime) > readBestTime())
+            if ((gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime) < readBestTime())
                 saveBestTime(gameTime);
 
             MouseState mouseState = Mouse.GetState();
@@ -292,10 +336,6 @@ public class MainScene : Game
             for (int x = 0; x < Singleton.GAMEWIDTH; x++)
             {
                 row += Singleton.Instance.GameBoard[x, y] != null ? "O " : ". ";
-                if (Singleton.Instance.GameBoard[x, y] != null)
-                {
-                    counterforexploded++;
-                }
             }
             Console.WriteLine(row);
         }
@@ -382,6 +422,7 @@ public class MainScene : Game
             if (playButtonRect.Contains(mousePoint))
             {
                 Singleton.Instance.GameStartTime = gameTime.TotalGameTime.TotalSeconds;
+                Reset(gameTime);
                 Singleton.Instance.CurrentGameState = Singleton.GameState.InGame;
 
             }
@@ -439,6 +480,22 @@ public class MainScene : Game
             }
         }
 
+        // Reduce combo display time
+        Singleton.Instance.ReduceComboTimer(gameTime);
+
+        // Draw combo text if active
+        if (Singleton.Instance.ComboDisplayTimer > 0)
+        {
+            string comboText = $"x{Singleton.Instance.LastComboCount}!";
+            Vector2 textSize = _font.MeasureString(comboText);
+            // Ensure the text doesn't go off-screen
+            Vector2 drawPosition = Singleton.Instance.LastComboPosition - new Vector2(textSize.X / 2, textSize.Y);
+            drawPosition.X = MathHelper.Clamp(drawPosition.X, 0, Singleton.GAMEWIDTH * Singleton.TILESIZE - textSize.X);
+            drawPosition.Y = MathHelper.Clamp(drawPosition.Y, 0, Singleton.GAMEHEIGHT * Singleton.TILESIZE - textSize.Y);
+            _spriteBatch.DrawString(_font, comboText, drawPosition, Color.White);
+        }
+
+
         // Draw launcher threshold
         _spriteBatch.Draw(_rectTexture, new Vector2(0f, Singleton.GAMEHEIGHT * Singleton.TILESIZE), null, Color.White, 0f, Vector2.Zero,
             new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE, 1f), SpriteEffects.None, 0f);
@@ -447,19 +504,19 @@ public class MainScene : Game
         _launcher.Draw(_spriteBatch);
 
         // Draw text
-        _spriteBatch.DrawString(_font, "Next: ", new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE), Color.White);
+        _spriteBatch.DrawString(_font, "Next: ", new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 8, Singleton.TILESIZE), Color.White);
 
         //draw score text
-        _spriteBatch.DrawString(_font, "Score: " + Singleton.Instance.Score, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 100), Color.White);
+        _spriteBatch.DrawString(_font, "Score: " + Singleton.Instance.Score, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 8, Singleton.TILESIZE + 100), Color.White);
 
         //draw high score text
-        _spriteBatch.DrawString(_font, "Highscore: " + Singleton.Instance.HighScore, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 200), Color.White);
+        _spriteBatch.DrawString(_font, "Highscore: " + Singleton.Instance.HighScore, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 8, Singleton.TILESIZE + 150), Color.White);
 
         //draw time elapsed
-        _spriteBatch.DrawString(_font, "Time: " + Math.Round(gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime), new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 300), Color.White);
+        _spriteBatch.DrawString(_font, "Time: " + Math.Round(gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime), new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 8, Singleton.TILESIZE + 250), Color.White);
 
         //draw best time
-        _spriteBatch.DrawString(_font, "Best Time: " + Math.Round(Singleton.Instance.BestTime), new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 4, Singleton.TILESIZE + 400), Color.White);
+        _spriteBatch.DrawString(_font, "Best Time: " + Math.Round(Singleton.Instance.BestTime), new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE + Singleton.SCOREWIDTH * Singleton.TILESIZE / 8, Singleton.TILESIZE + 300), Color.White);
     }
 
     private void DrawGameOverScreen()

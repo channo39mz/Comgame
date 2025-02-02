@@ -12,6 +12,7 @@ class Launcher : GameObject
     private Vector2 _position;
     private List<MovingBubble> _movingBubbles;
 
+
     public Launcher(Texture2D texture, Vector2 position) : base(texture)
     {
         _position = position;
@@ -38,8 +39,9 @@ class Launcher : GameObject
             Singleton.Instance.ShotCounter++;
             if (Singleton.Instance.ShotCounter >= Singleton.SHOTS_BEFORE_DROP)
             {
-                Singleton.DropCeiling();
+                Singleton.Instance.DropCeiling();
             }
+
 
             Singleton.Instance.CurrentBubble = Singleton.Instance.NextBubble;
             Singleton.Instance.NextBubble = GenerateRandomBubble();
@@ -47,14 +49,6 @@ class Launcher : GameObject
     }
 
     public override void Update(GameTime gameTime)
-    {
-        HandleInput();
-        UpdateBubbles(gameTime);
-        Singleton.Instance.CurrentBubble.Position = _position - new Vector2(Singleton.TILESIZE / 2, Singleton.TILESIZE / 2 - 10);
-        base.Update(gameTime);
-    }
-
-    private void HandleInput()
     {
         var keyboardState = Singleton.Instance.CurrentKey;
 
@@ -69,16 +63,16 @@ class Launcher : GameObject
         {
             ShootBubble();
         }
-    }
 
-    private void UpdateBubbles(GameTime gameTime)
-    {
         foreach (var bubble in _movingBubbles)
         {
             bubble.Update(gameTime);
         }
 
         _movingBubbles.RemoveAll(b => b.HasStopped);
+
+        Singleton.Instance.CurrentBubble.Position = _position - new Vector2(Singleton.TILESIZE / 2, Singleton.TILESIZE / 2 - 10);
+        base.Update(gameTime);
     }
 
     public override void Draw(SpriteBatch spriteBatch)

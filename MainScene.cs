@@ -77,9 +77,9 @@ public class MainScene : Game
         _randomNum = _random.Next(0, 10);
         _song = _randomNum % 2 == 0 ? Content.Load<Song>("Audio/bgm_main") : Content.Load<Song>("Audio/bgm_main2");
         Console.WriteLine(_randomNum % 2);
-        Singleton.Instance.Exploded = Content.Load<SoundEffect>("Audio/exploded");
-        Singleton.Instance.DropRow = Content.Load<SoundEffect>("Audio/newroll");
-        Singleton.Instance.BHSound = Content.Load<SoundEffect>("Audio/blackhole");
+        Singleton.Instance.ExplodedSound = Content.Load<SoundEffect>("Audio/exploded");
+        Singleton.Instance.CeilingDropSound = Content.Load<SoundEffect>("Audio/newroll");
+        Singleton.Instance.BlackholeSound = Content.Load<SoundEffect>("Audio/blackhole");
         _winSound = Content.Load<SoundEffect>("Audio/win");
         _loseSound = Content.Load<SoundEffect>("Audio/fail");
         MediaPlayer.Play(_song); // Background Music play
@@ -164,7 +164,7 @@ public class MainScene : Game
             _launcher.Update(gameTime);
             _effPlayTime = false;
 
-            if (Singleton.IsGameBoardEmpty())
+            if (Singleton.Instance.IsGameBoardEmpty())
             {
                 Singleton.Instance.CurrentGameState = Singleton.GameState.GameWon;
             }
@@ -259,7 +259,6 @@ public class MainScene : Game
             Singleton.Instance.GameStartTime = gameTime.TotalGameTime.TotalSeconds;
             Singleton.Instance.ShotCounter = 0;
             Singleton.Instance.IsTopRowEven = true;
-            Singleton.Instance.CeilingDropTimer = 0.0;
             Singleton.Instance.Score = 0;
         }
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>c:/Users/ADMIN/Desktop/CS classes/ThirdYear/Term2/ComGame/Bubble Game (Alpha)/Comgame/Content/bk_explo_one.png</SourceFile>
-  <SourceTime>2025-02-01T22:51:39.7615411+07:00</SourceTime>
-  <DestFile>c:/Users/ADMIN/Desktop/CS classes/ThirdYear/Term2/ComGame/Bubble Game (Alpha)/Comgame/Content/bin/DesktopGL/bk_explo_one.xnb</DestFile>
-  <DestTime>2025-02-02T00:16:54.3509344+07:00</DestTime>
+  <SourceFile>c:/Users/modda/OneDrive/Documents/KMITL/ปี 3/Computer Game Programming/MidtermProject/Content/bk_explo_one.png</SourceFile>
+  <SourceTime>2025-02-02T00:21:46.7179471+07:00</SourceTime>
+  <DestFile>c:/Users/modda/OneDrive/Documents/KMITL/ปี 3/Computer Game Programming/MidtermProject/Content/bin/DesktopGL/bk_explo_one.xnb</DestFile>
+  <DestTime>2025-02-02T02:53:04.5171627+07:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2024-08-17T00:05:56+07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

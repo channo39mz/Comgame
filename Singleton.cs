@@ -41,10 +41,11 @@ class Singleton
 	public KeyboardState PreviousKey, CurrentKey;
 	public SoundEffect exploded;
 	public SoundEffect dropRow;
+	public SoundEffect BHSound;
 
 	public Random Random = new Random();
 
-	public const int SHOTS_BEFORE_DROP = 5;
+	public const int SHOTS_BEFORE_DROP = 10;
 	public int ShotCounter = 0;
 
 	public bool IsTopRowEven = true;
@@ -127,6 +128,7 @@ class Singleton
 	public static void DropCeiling()
 	{
 		Console.WriteLine("Ceiling Dropped!");
+		instance.dropRow.Play();
 
 		bool willLose = false;
 		// Check lose state

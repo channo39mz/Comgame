@@ -19,6 +19,12 @@
 /processorParam:Quality=Best
 /build:Audio/bgm_main.mp3
 
+#begin Audio/blackhole.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/blackhole.mp3
+
 #begin Audio/exploded.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor

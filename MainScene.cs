@@ -25,7 +25,6 @@ public class MainScene : Game
     private double _bgTimer = 0;
     private double _bgInterval = 0.5; // Time interval in seconds (adjust as needed)
     private Song song;
-    private SoundEffect dropRow;
     private SoundEffect winSound;
     private SoundEffect loseSound;
     public SoundEffect exploded;
@@ -88,6 +87,7 @@ public class MainScene : Game
         Console.WriteLine(randomNum % 2);
         Singleton.Instance.exploded = Content.Load<SoundEffect>("Audio/exploded");
         Singleton.Instance.dropRow = Content.Load<SoundEffect>("Audio/newroll");
+        Singleton.Instance.BHSound = Content.Load<SoundEffect>("Audio/blackhole");
         winSound = Content.Load<SoundEffect>("Audio/win");
         loseSound = Content.Load<SoundEffect>("Audio/fail");
         MediaPlayer.Play(song); //Backgound Music play
@@ -129,25 +129,25 @@ public class MainScene : Game
         var keyboardState = Keyboard.GetState();
         Singleton.Instance.CurrentKey = keyboardState;
 
-        if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon && effPlayTime == false)
+        if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon && !effPlayTime)
         {
-            winSound.Play(0.25f, 0.0f, 0.0f);
+            winSound.Play(0.6f, 0.0f, 0.0f);
             MediaPlayer.Stop();
             Console.WriteLine(effPlayTime);
             MediaPlayer.IsRepeating = true;
             isBGMStop = true;
             effPlayTime = true;
         }
-        if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose && effPlayTime == false)
+        if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose && !effPlayTime)
         {
-            loseSound.Play(0.25f, 0.0f, 0.0f);
+            loseSound.Play(0.7f, 0.0f, 0.0f);
             MediaPlayer.Stop();
             Console.WriteLine(effPlayTime);
             MediaPlayer.IsRepeating = true;
             isBGMStop = true;
             effPlayTime = true;
         }
-        if (isBGMStop == true && !(Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose || Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon))
+        if (isBGMStop && !(Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose || Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon))
         {
             isBGMStop = false;
             MediaPlayer.Play(song);
@@ -166,6 +166,11 @@ public class MainScene : Game
         }
         else if (Singleton.Instance.CurrentGameState == Singleton.GameState.InGame)
         {
+            if (Singleton.Instance.PreviousKey.IsKeyDown(Keys.R) && Singleton.Instance.CurrentKey.IsKeyUp(Keys.R))
+            {
+                Reset(gameTime);
+            }
+
             _launcher.Update(gameTime);
             effPlayTime = false;
 

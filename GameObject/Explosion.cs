@@ -23,7 +23,7 @@ namespace Comgame.GameObject
             _frameWidth = frameWidth;
             _frameHeight = frameHeight;
 
-            // คำนวณตำแหน่งให้ตรงกลาง Bubble
+            // Calculate the position to center the explosion on the bubble
             _position = new Vector2(
                 bubbleCenter.X - (_frameWidth / 2),
                 bubbleCenter.Y - (_frameHeight / 2)

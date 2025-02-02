@@ -24,21 +24,20 @@ public class MainScene : Game
     private int _currentBgIndex = 0;
     private double _bgTimer = 0;
     private double _bgInterval = 0.5; // Time interval in seconds (adjust as needed)
-    private Song song;
-    private SoundEffect winSound;
-    private SoundEffect loseSound;
-    public SoundEffect exploded;
-    private float volumn = 0.25f;
-    private bool effPlayTime = false;
-    private bool isBGMStop = false;
-    private Random randoming = new Random();
-    private int randomNum;
+    private Song _song;
+    private SoundEffect _winSound;
+    private SoundEffect _loseSound;
+    private float _volume = 0.25f;
+    private bool _effPlayTime = false;
+    private bool _isBGMStop = false;
+    private Random _random = new Random();
+    private int _randomNum;
 
-    private Rectangle playButtonRect;
-    private Rectangle exitButtonRect;
-    private Rectangle playAgainButtonRect;
-    private Rectangle restartButtonRect;
-    private Rectangle menuButtonRect;
+    private Rectangle _playButtonRect;
+    private Rectangle _exitButtonRect;
+    private Rectangle _playAgainButtonRect;
+    private Rectangle _restartButtonRect;
+    private Rectangle _menuButtonRect;
     private Texture2D _explosionTexture;
     private List<Explosion> _activeExplosions = new List<Explosion>();
 
@@ -62,12 +61,12 @@ public class MainScene : Game
         int centerX = (_graphics.PreferredBackBufferWidth - buttonWidth) / 2;
         int centerY = _graphics.PreferredBackBufferHeight / 2;
 
-        playButtonRect = new Rectangle(centerX, centerY - 50, buttonWidth, buttonHeight);
-        exitButtonRect = new Rectangle(centerX, centerY + 50, buttonWidth, buttonHeight);
+        _playButtonRect = new Rectangle(centerX, centerY - 50, buttonWidth, buttonHeight);
+        _exitButtonRect = new Rectangle(centerX, centerY + 50, buttonWidth, buttonHeight);
 
-        playAgainButtonRect = new Rectangle(centerX, _graphics.PreferredBackBufferHeight / 2, buttonWidth, buttonHeight);
-        restartButtonRect = new Rectangle(centerX, _graphics.PreferredBackBufferHeight / 2, buttonWidth, buttonHeight);
-        menuButtonRect = new Rectangle(centerX, _graphics.PreferredBackBufferHeight / 2 + 100, buttonWidth, buttonHeight);
+        _playAgainButtonRect = new Rectangle(centerX, _graphics.PreferredBackBufferHeight / 2, buttonWidth, buttonHeight);
+        _restartButtonRect = new Rectangle(centerX, _graphics.PreferredBackBufferHeight / 2, buttonWidth, buttonHeight);
+        _menuButtonRect = new Rectangle(centerX, _graphics.PreferredBackBufferHeight / 2 + 100, buttonWidth, buttonHeight);
 
         base.Initialize();
     }
@@ -75,23 +74,16 @@ public class MainScene : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        randomNum = randoming.Next(0, 10);
-        if (randomNum % 2 == 0)
-        {
-            song = Content.Load<Song>("Audio/bgm_main");
-        }
-        else
-        {
-            song = Content.Load<Song>("Audio/bgm_main2");
-        }
-        Console.WriteLine(randomNum % 2);
-        Singleton.Instance.exploded = Content.Load<SoundEffect>("Audio/exploded");
-        Singleton.Instance.dropRow = Content.Load<SoundEffect>("Audio/newroll");
+        _randomNum = _random.Next(0, 10);
+        _song = _randomNum % 2 == 0 ? Content.Load<Song>("Audio/bgm_main") : Content.Load<Song>("Audio/bgm_main2");
+        Console.WriteLine(_randomNum % 2);
+        Singleton.Instance.Exploded = Content.Load<SoundEffect>("Audio/exploded");
+        Singleton.Instance.DropRow = Content.Load<SoundEffect>("Audio/newroll");
         Singleton.Instance.BHSound = Content.Load<SoundEffect>("Audio/blackhole");
-        winSound = Content.Load<SoundEffect>("Audio/win");
-        loseSound = Content.Load<SoundEffect>("Audio/fail");
-        MediaPlayer.Play(song); //Backgound Music play
-        MediaPlayer.Volume = volumn; //Background Music Volumn
+        _winSound = Content.Load<SoundEffect>("Audio/win");
+        _loseSound = Content.Load<SoundEffect>("Audio/fail");
+        MediaPlayer.Play(_song); // Background Music play
+        MediaPlayer.Volume = _volume; // Background Music Volume
         _bubbleTextures = new Dictionary<Bubble.BubbleColor, Texture2D>
         {
             { Bubble.BubbleColor.RED, Content.Load<Texture2D>("bubble_red") },
@@ -102,18 +94,17 @@ public class MainScene : Game
         };
         Bubble.LoadTextures(_bubbleTextures);
 
-        _backgroundTextures =
-        [
+        _backgroundTextures = new Texture2D[]
+        {
             Content.Load<Texture2D>("bg_0"),
             Content.Load<Texture2D>("bg_1"),
             Content.Load<Texture2D>("bg_2"),
             Content.Load<Texture2D>("bg_3"),
             Content.Load<Texture2D>("bg_4"),
             Content.Load<Texture2D>("bg_5"),
-        ];
+        };
 
         _launcherTexture = Content.Load<Texture2D>("launcher");
-
         _explosionTexture = Content.Load<Texture2D>("bk_explo_one");
 
         _rectTexture = new Texture2D(_graphics.GraphicsDevice, 1, 1);
@@ -129,31 +120,30 @@ public class MainScene : Game
         var keyboardState = Keyboard.GetState();
         Singleton.Instance.CurrentKey = keyboardState;
 
-        if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon && !effPlayTime)
+        if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon && !_effPlayTime)
         {
-            winSound.Play(0.6f, 0.0f, 0.0f);
+            _winSound.Play(0.6f, 0.0f, 0.0f);
             MediaPlayer.Stop();
-            Console.WriteLine(effPlayTime);
+            Console.WriteLine(_effPlayTime);
             MediaPlayer.IsRepeating = true;
-            isBGMStop = true;
-            effPlayTime = true;
+            _isBGMStop = true;
+            _effPlayTime = true;
         }
-        if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose && !effPlayTime)
+        if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose && !_effPlayTime)
         {
-            loseSound.Play(0.7f, 0.0f, 0.0f);
+            _loseSound.Play(0.7f, 0.0f, 0.0f);
             MediaPlayer.Stop();
-            Console.WriteLine(effPlayTime);
+            Console.WriteLine(_effPlayTime);
             MediaPlayer.IsRepeating = true;
-            isBGMStop = true;
-            effPlayTime = true;
+            _isBGMStop = true;
+            _effPlayTime = true;
         }
-        if (isBGMStop && !(Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose || Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon))
+        if (_isBGMStop && !(Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose || Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon))
         {
-            isBGMStop = false;
-            MediaPlayer.Play(song);
-            MediaPlayer.Volume = volumn;
+            _isBGMStop = false;
+            MediaPlayer.Play(_song);
+            MediaPlayer.Volume = _volume;
         }
-
 
         if (keyboardState.IsKeyDown(Keys.Escape))
         {
@@ -172,13 +162,7 @@ public class MainScene : Game
             }
 
             _launcher.Update(gameTime);
-            effPlayTime = false;
-
-            // Bypass
-            // if (Singleton.Instance.ShotCounter == 10)
-            // {
-            //     Singleton.Instance.CurrentGameState = Singleton.GameState.GameWon;
-            // }
+            _effPlayTime = false;
 
             if (Singleton.IsGameBoardEmpty())
             {
@@ -192,58 +176,19 @@ public class MainScene : Game
                 _currentBgIndex = (_currentBgIndex + 1) % _backgroundTextures.Length;
                 _bgTimer = 0;
             }
-
-            // Singleton.Instance.CeilingDropTimer += gameTime.ElapsedGameTime.TotalSeconds;
-
-            // if (Singleton.Instance.CeilingDropTimer >= Singleton.CEILING_DROP_INTERVAL)
-            // {
-            //     Singleton.DropCeiling();
-            //     Singleton.Instance.CeilingDropTimer = 0.0; // Reset timer after dropping ceiling
-            // }
         }
         else if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameLose)
         {
-            MouseState mouseState = Mouse.GetState();
-            if (mouseState.LeftButton == ButtonState.Pressed)
-            {
-                Point mousePoint = new Point(mouseState.X, mouseState.Y);
-                if (restartButtonRect.Contains(mousePoint))
-                {
-                    Reset(gameTime);
-                    Singleton.Instance.CurrentGameState = Singleton.GameState.InGame;
-                }
-                else if (menuButtonRect.Contains(mousePoint))
-                {
-                    Singleton.Instance.CurrentGameState = Singleton.GameState.MainMenu;
-                }
-            }
+            HandleGameOverInput(gameTime);
         }
         else if (Singleton.Instance.CurrentGameState == Singleton.GameState.GameWon)
         {
-            if (Singleton.Instance.Score > Singleton.Instance.HighScore)
-                saveHighScore();
-            if ((gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime) < Singleton.Instance.BestTime)
-                saveBestTime(gameTime);
-
-            MouseState mouseState = Mouse.GetState();
-            if (mouseState.LeftButton == ButtonState.Pressed)
-            {
-                Point mousePoint = new Point(mouseState.X, mouseState.Y);
-                if (playAgainButtonRect.Contains(mousePoint))
-                {
-                    Reset(gameTime);
-                    Singleton.Instance.CurrentGameState = Singleton.GameState.InGame;
-                }
-                else if (menuButtonRect.Contains(mousePoint))
-                {
-                    Singleton.Instance.CurrentGameState = Singleton.GameState.MainMenu;
-                }
-            }
+            HandleGameWonInput(gameTime);
         }
 
         Singleton.Instance.PreviousKey = Singleton.Instance.CurrentKey;
 
-        // เพิ่มในส่วน Update
+        // Update active explosions
         for (int i = _activeExplosions.Count - 1; i >= 0; i--)
         {
             _activeExplosions[i].Update(gameTime);
@@ -253,17 +198,17 @@ public class MainScene : Game
             }
         }
 
-        // ลงทะเบียน Event ใน Initialize หรือ LoadContent
+        // Register event for bubble destruction
         Singleton.OnBubbleDestroyed += pos =>
         {
             _activeExplosions.Add(new Explosion(
                 _explosionTexture,
                 pos,
-                64,    // ความกว้างของแต่ละเฟรม
-                64,    // ความสูงของแต่ละเฟรม
-                36,     // จำนวนคอลัมน์ในสไปรท์ชีต
-                1,     // จำนวนแถวในสไปรท์ชีต
-                -0.01f  // เวลาแสดงแต่ละเฟรม (วินาที)
+                64,    // Frame width
+                64,    // Frame height
+                36,    // Columns in sprite sheet
+                1,     // Rows in sprite sheet
+                -0.01f // Frame time
             ));
         };
 
@@ -292,7 +237,7 @@ public class MainScene : Game
             DrawGameWonScreen();
         }
 
-        // เพิ่มในส่วน Draw หลังจากวาด Bubble
+        // Draw active explosions
         foreach (var explosion in _activeExplosions)
         {
             explosion.Draw(_spriteBatch);
@@ -304,8 +249,8 @@ public class MainScene : Game
 
     protected void Reset(GameTime gameTime = null)
     {
-        loadBestTime();
-        loadHighScore();
+        LoadBestTime();
+        LoadHighScore();
         _launcher = new Launcher(_launcherTexture, new Vector2(Singleton.GAMEWIDTH * Singleton.TILESIZE / 2, (Singleton.GAMEHEIGHT + 1) * Singleton.TILESIZE));
         Singleton.Instance.GameBoard = new Bubble[Singleton.GAMEWIDTH, Singleton.GAMEHEIGHT];
 
@@ -345,7 +290,7 @@ public class MainScene : Game
         }
     }
 
-    protected void loadHighScore()
+    protected void LoadHighScore()
     {
         // Load score from file
         if (File.Exists(Singleton.SCOREFILE))
@@ -358,7 +303,7 @@ public class MainScene : Game
         }
     }
 
-    protected void loadBestTime()
+    protected void LoadBestTime()
     {
         // Load score from file
         if (File.Exists(Singleton.BESTTIMEFILE))
@@ -379,13 +324,13 @@ public class MainScene : Game
         }
     }
 
-    protected void saveHighScore()
+    protected void SaveHighScore()
     {
         // Save score to file
         File.WriteAllText(Singleton.SCOREFILE, Singleton.Instance.Score.ToString());
     }
 
-    protected void saveBestTime(GameTime gameTime)
+    protected void SaveBestTime(GameTime gameTime)
     {
         // Save score to file
         File.WriteAllText(Singleton.BESTTIMEFILE, (gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime).ToString());
@@ -403,16 +348,57 @@ public class MainScene : Game
         if (mouseState.LeftButton == ButtonState.Pressed)
         {
             Point mousePoint = new Point(mouseState.X, mouseState.Y);
-            if (playButtonRect.Contains(mousePoint))
+            if (_playButtonRect.Contains(mousePoint))
             {
                 Singleton.Instance.GameStartTime = gameTime.TotalGameTime.TotalSeconds;
                 Reset(gameTime);
                 Singleton.Instance.CurrentGameState = Singleton.GameState.InGame;
 
             }
-            else if (exitButtonRect.Contains(mousePoint))
+            else if (_exitButtonRect.Contains(mousePoint))
             {
                 Exit();
+            }
+        }
+    }
+
+    private void HandleGameOverInput(GameTime gameTime)
+    {
+        MouseState mouseState = Mouse.GetState();
+        if (mouseState.LeftButton == ButtonState.Pressed)
+        {
+            Point mousePoint = new Point(mouseState.X, mouseState.Y);
+            if (_restartButtonRect.Contains(mousePoint))
+            {
+                Reset(gameTime);
+                Singleton.Instance.CurrentGameState = Singleton.GameState.InGame;
+            }
+            else if (_menuButtonRect.Contains(mousePoint))
+            {
+                Singleton.Instance.CurrentGameState = Singleton.GameState.MainMenu;
+            }
+        }
+    }
+
+    private void HandleGameWonInput(GameTime gameTime)
+    {
+        if (Singleton.Instance.Score > Singleton.Instance.HighScore)
+            SaveHighScore();
+        if ((gameTime.TotalGameTime.TotalSeconds - Singleton.Instance.GameStartTime) < Singleton.Instance.BestTime)
+            SaveBestTime(gameTime);
+
+        MouseState mouseState = Mouse.GetState();
+        if (mouseState.LeftButton == ButtonState.Pressed)
+        {
+            Point mousePoint = new Point(mouseState.X, mouseState.Y);
+            if (_playAgainButtonRect.Contains(mousePoint))
+            {
+                Reset(gameTime);
+                Singleton.Instance.CurrentGameState = Singleton.GameState.InGame;
+            }
+            else if (_menuButtonRect.Contains(mousePoint))
+            {
+                Singleton.Instance.CurrentGameState = Singleton.GameState.MainMenu;
             }
         }
     }
@@ -422,8 +408,8 @@ public class MainScene : Game
         string titleText = "Puzzle Bobble";
         _spriteBatch.DrawString(_font, titleText, new Vector2((_graphics.PreferredBackBufferWidth - _font.MeasureString(titleText).X) / 2, 120), Color.White);
 
-        DrawButton(playButtonRect, "Play");
-        DrawButton(exitButtonRect, "Exit");
+        DrawButton(_playButtonRect, "Play");
+        DrawButton(_exitButtonRect, "Exit");
     }
 
     private void DrawButton(Rectangle rect, string text)
@@ -508,8 +494,8 @@ public class MainScene : Game
         string gameOverText = "Game Over!";
         _spriteBatch.DrawString(_font, gameOverText, new Vector2((_graphics.PreferredBackBufferWidth - _font.MeasureString(gameOverText).X) / 2, 150), Color.Red);
 
-        DrawButton(restartButtonRect, "Restart");
-        DrawButton(menuButtonRect, "Main Menu");
+        DrawButton(_restartButtonRect, "Restart");
+        DrawButton(_menuButtonRect, "Main Menu");
     }
 
     private void DrawGameWonScreen()
@@ -517,7 +503,7 @@ public class MainScene : Game
         string gameWonText = "You Won!";
         _spriteBatch.DrawString(_font, gameWonText, new Vector2((_graphics.PreferredBackBufferWidth - _font.MeasureString(gameWonText).X) / 2, 150), Color.Green);
 
-        DrawButton(playAgainButtonRect, "Play Again");
-        DrawButton(menuButtonRect, "Main Menu");
+        DrawButton(_playAgainButtonRect, "Play Again");
+        DrawButton(_menuButtonRect, "Main Menu");
     }
 }

@@ -11,10 +11,9 @@ class Singleton
 {
 	private static Singleton instance;
 
+	// Constants
 	public const string WINDOWTITLE = "Shoot that asteroid like his those balls!";
-
 	public const string SCOREFILE = "./Content/highscore.txt";
-
 	public const string BESTTIMEFILE = "./Content/besttime.txt";
 	public const int TILESIZE = 48;
 	public const int GAMEWIDTH = 8;
@@ -23,44 +22,36 @@ class Singleton
 	public const int LAUNCHERHEIGHT = 2;
 	public const int SCREENWIDTH = GAMEWIDTH + SCOREWIDTH;
 	public const int SCREENHEIGHT = GAMEHEIGHT + LAUNCHERHEIGHT;
-
 	public const int INITIALROWS = 4;
 	public const double DROP_INTERVAL = 5.0;
-
-	public int Score = 0;
-	public int HighScore = 0;
-	public double GameStartTime = 0;
-
-	public double BestTime = 0;
-	public MovingBubble CurrentBubble;
-
-	public MovingBubble NextBubble;
-
-	public Bubble[,] GameBoard;
-
-	public KeyboardState PreviousKey, CurrentKey;
-	public SoundEffect exploded;
-	public SoundEffect dropRow;
-	public SoundEffect BHSound;
-
-	public Random Random = new Random();
-
 	public const int SHOTS_BEFORE_DROP = 10;
-	public int ShotCounter = 0;
-
-	public bool IsTopRowEven = true;
-
 	public const double CEILING_DROP_INTERVAL = 5.0; // Drop every 10 seconds (adjust as needed)
-	public double CeilingDropTimer = 0.0;
-	public static bool IsCeilingDropping = false;
-	public static event Action<Vector2> OnBubbleDestroyed;
+	private const double ComboDisplayDuration = 1.0; // Display for 1 second
 
+	// Properties
+	public int Score { get; set; } = 0;
+	public int HighScore { get; set; } = 0;
+	public double GameStartTime { get; set; } = 0;
+	public double BestTime { get; set; } = 0;
+	public MovingBubble CurrentBubble { get; set; }
+	public MovingBubble NextBubble { get; set; }
+	public Bubble[,] GameBoard { get; set; }
+	public KeyboardState PreviousKey { get; set; }
+	public KeyboardState CurrentKey { get; set; }
+	public SoundEffect Exploded { get; set; }
+	public SoundEffect DropRow { get; set; }
+	public SoundEffect BHSound { get; set; }
+	public Random Random { get; } = new Random();
+	public int ShotCounter { get; set; } = 0;
+	public bool IsTopRowEven { get; set; } = true;
+	public double CeilingDropTimer { get; set; } = 0.0;
+	public static bool IsCeilingDropping { get; set; } = false;
+	public static event Action<Vector2> OnBubbleDestroyed;
 	public int LastComboCount { get; private set; } = 0;
 	public Vector2 LastComboPosition { get; private set; } = Vector2.Zero;
 	public double ComboDisplayTimer { get; private set; } = 0;
-	private const double ComboDisplayDuration = 1.0; // Display for 1 second
 
-
+	// Game states
 	public enum GameState
 	{
 		MainMenu,
@@ -69,13 +60,9 @@ class Singleton
 		GameLose
 	}
 
-	public GameState CurrentGameState = GameState.MainMenu;
+	public GameState CurrentGameState { get; set; } = GameState.MainMenu;
 
-
-	private Singleton()
-	{
-
-	}
+	private Singleton() { }
 
 	public static Singleton Instance
 	{
@@ -89,7 +76,8 @@ class Singleton
 		}
 	}
 
-	public static void rendergameboard()
+	// Methods
+	public static void RenderGameBoard()
 	{
 		for (int y = 0; y < GAMEHEIGHT; y++)
 		{
@@ -109,7 +97,7 @@ class Singleton
 		}
 	}
 
-	public static void printgameboard()
+	public static void PrintGameBoard()
 	{
 		// Print GameBoard structure to console
 		Console.WriteLine("GameBoard Visualization:");
@@ -128,7 +116,7 @@ class Singleton
 	public static void DropCeiling()
 	{
 		Console.WriteLine("Ceiling Dropped!");
-		instance.dropRow.Play();
+		instance.DropRow.Play();
 
 		bool willLose = false;
 		// Check lose state
@@ -168,7 +156,7 @@ class Singleton
 		instance.ShotCounter = 0;
 
 		// Re-render the game board after shifting
-		rendergameboard();
+		RenderGameBoard();
 
 		if (willLose)
 		{
@@ -224,6 +212,4 @@ class Singleton
 			ComboDisplayTimer -= gameTime.ElapsedGameTime.TotalSeconds;
 		}
 	}
-
-
 }

@@ -3,10 +3,10 @@ using Microsoft.Xna.Framework;
 using Comgame.GameObject;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Comgame;
 
+// Base code from KMITL Comgame Class (Tetris Exercise)
 class Singleton
 {
 	private static Singleton instance;

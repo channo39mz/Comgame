@@ -185,7 +185,6 @@ c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\Midte
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\fail.xnb
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\newroll.xnb
 c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\Audio\win.xnb
-c:\Users\modda\OneDrive\Documents\KMITL\ปี 3\Computer Game Programming\MidtermProject\bin\Debug\net8.0\Content\retro_gaming.ttf
 >>>>>>> 7dab696d4b31b21dede424d487ff19808a72b209
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\Audio\bgm_main2.ogg
 c:\Users\ADMIN\Desktop\CS classes\ThirdYear\Term2\ComGame\Bubble Game (Alpha)\Comgame\bin\Debug\net8.0\Content\Audio\bgm_main2.xnb

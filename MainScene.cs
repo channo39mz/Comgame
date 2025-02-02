@@ -108,11 +108,9 @@ public class MainScene : Game
         _explosionTexture = Content.Load<Texture2D>("bk_explo_one");
 
         _rectTexture = new Texture2D(_graphics.GraphicsDevice, 1, 1);
-        _rectTexture.SetData(new[] { Color.White });
+        _rectTexture.SetData([Color.White]);
 
         _font = Content.Load<SpriteFont>("GameFont");
-
-        Reset();
     }
 
     protected override void Update(GameTime gameTime)
@@ -404,7 +402,7 @@ public class MainScene : Game
 
     private void DrawMainMenu()
     {
-        string titleText = "Puzzle Bobble";
+        string titleText = "Shoot that asteroid like those balls!";
         _spriteBatch.DrawString(_font, titleText, new Vector2((_graphics.PreferredBackBufferWidth - _font.MeasureString(titleText).X) / 2, 120), Color.White);
 
         DrawButton(_playButtonRect, "Play");

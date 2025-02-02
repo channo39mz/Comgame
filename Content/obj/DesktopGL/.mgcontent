@@ -5,6 +5,7 @@
   <Config />
   <SourceFiles>
     <File>c:/Users/modda/OneDrive/Documents/KMITL/ปี 3/Computer Game Programming/MidtermProject/Content/Audio/bgm_main.mp3</File>
+    <File>c:/Users/modda/OneDrive/Documents/KMITL/ปี 3/Computer Game Programming/MidtermProject/Content/Audio/blackhole.mp3</File>
     <File>c:/Users/modda/OneDrive/Documents/KMITL/ปี 3/Computer Game Programming/MidtermProject/Content/Audio/exploded.mp3</File>
     <File>c:/Users/modda/OneDrive/Documents/KMITL/ปี 3/Computer Game Programming/MidtermProject/Content/bk_explo_one.png</File>
     <File>c:/Users/modda/OneDrive/Documents/KMITL/ปี 3/Computer Game Programming/MidtermProject/Content/bubble_blue.png</File>
@@ -16,6 +17,7 @@
     <File>c:/Users/modda/OneDrive/Documents/KMITL/ปี 3/Computer Game Programming/MidtermProject/Content/launcher.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
